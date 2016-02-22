@@ -28,6 +28,7 @@ public class ZeusMainActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_main);
+        Firebase.setAndroidContext(this);
         /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -69,10 +70,8 @@ public class ZeusMainActivity extends AppCompatActivity
                 ValueEventListener listener = new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot snapshot) {
-                        DataSnapshot uid = snapshot;
-
-                        if (uid.exists()) {
-                            final Firebase firebaseUserRef = new Firebase("https://sunsspot.firebaseio.com/").child(uid.getValue(String.class));
+                        if (snapshot.exists()) {
+                            final Firebase firebaseUserRef = new Firebase("https://sunsspot.firebaseio.com/").child(snapshot.getValue(String.class));
                             firebaseUserRef.authWithPassword(email, password, new Firebase.AuthResultHandler() {
                                 public void onAuthenticated(AuthData authData) {
                                     testUserFeedback.setText("Login Successful");
