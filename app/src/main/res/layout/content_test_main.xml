@@ -17,9 +17,12 @@
         android:layout_height="wrap_content"
         android:text="Log In"
         android:id="@+id/buttonLogIn"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="117dp" />
+        android:layout_below="@+id/textFieldPassword"
+        android:layout_alignLeft="@+id/textFieldPassword"
+        android:layout_alignStart="@+id/textFieldPassword"
+        android:layout_marginTop="50dp"
+        android:layout_alignRight="@+id/textFieldPassword"
+        android:layout_alignEnd="@+id/textFieldPassword" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -27,9 +30,8 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Email"
         android:id="@+id/textEmailID"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="76dp" />
+        android:layout_below="@+id/TextFieldOutput"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -37,7 +39,6 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Password"
         android:id="@+id/textPasswordID"
-        android:layout_marginTop="52dp"
         android:layout_below="@+id/textFieldEmail"
         android:layout_centerHorizontal="true" />
 
@@ -56,11 +57,11 @@
         android:inputType="textEmailAddress"
         android:ems="10"
         android:id="@+id/textFieldEmail"
-        android:layout_below="@+id/textEmailID"
-        android:layout_centerHorizontal="true"
         android:allowUndo="true"
         android:editable="true"
-        android:enabled="true" />
+        android:enabled="true"
+        android:layout_below="@+id/textEmailID"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
