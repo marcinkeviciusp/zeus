@@ -76,7 +76,8 @@ public class ZeusMainActivity extends AppCompatActivity
                                 public void onAuthenticated(AuthData authData) {
                                     testUserFeedback.setText("Login Successful");
                                     ROOT = firebaseUserRef;
-                                    //startActivity(new Intent(ZeusMainActivity.this, MainMenuActivity.class));
+                                    Intent intent = new Intent(ZeusMainActivity.this, MainMenuActivity.class);
+                                    startActivity(intent);
                                 }
 
                                 public void onAuthenticationError(FirebaseError firebaseError) {

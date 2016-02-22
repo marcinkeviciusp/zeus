@@ -2,4 +2,11 @@
     <string name="app_name">Zeus</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_main_menu">MainMenuActivity</string>
+
+    <string name="title_activity_dashboard">DashboardActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_dash_board">DashBoardActivity</string>
+    <string name="title_activity_control_panel">ControlPanelActivity</string>
+    <string name="title_activity_data_trends">DataTrendsActivity</string>
 </resources>
