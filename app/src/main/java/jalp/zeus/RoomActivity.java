@@ -24,6 +24,10 @@ public class RoomActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        System.out.println("###############################");
+        System.out.println("Selected room ID is: " + DashBoardActivity.room);
+        System.out.println("###############################");
     }
 
 }
