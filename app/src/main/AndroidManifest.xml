@@ -51,6 +51,10 @@
         <activity
             android:name=".GraphBatteryActivity"
             android:label="@string/title_activity_graph_battery"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".RoomActivity"
+            android:label="@string/title_activity_room"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
