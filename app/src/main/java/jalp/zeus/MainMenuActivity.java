@@ -14,6 +14,7 @@ public class MainMenuActivity extends AppCompatActivity {
     Button buttonDataTrends;
     Button buttonDashBoard;
     Button buttonControlPanel;
+    Button buttonRoom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +26,7 @@ public class MainMenuActivity extends AppCompatActivity {
         buttonDataTrends = (Button) findViewById(R.id.buttonDataTrends);
         buttonDashBoard = (Button) findViewById(R.id.buttonDashboard);
         buttonControlPanel = (Button) findViewById(R.id.buttonControlPanel);
+        buttonRoom = (Button) findViewById(R.id.buttonRoom);
 
         buttonDataTrends.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -44,6 +46,11 @@ public class MainMenuActivity extends AppCompatActivity {
             }
         });
 
+        buttonRoom.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(MainMenuActivity.this, ControlPanelActivity.class));
+            }
+        });
         /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
