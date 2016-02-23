@@ -38,4 +38,13 @@
         android:layout_below="@+id/buttonControlPanel"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="86dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Room"
+        android:id="@+id/buttonRoom"
+        android:layout_below="@+id/buttonDataTrends"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="86dp" />
 </RelativeLayout>
