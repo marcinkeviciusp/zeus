@@ -82,7 +82,7 @@ public class ZeusMainActivity extends AppCompatActivity
                                     spinnerLoggingIn.setVisibility(View.INVISIBLE);
                                     buttonLogIn.setVisibility(View.VISIBLE);
                                     testUserFeedback.setText("Login Successful");
-                                    ROOT = firebaseUserRef;
+                                    ROOT = firebaseUserRef.child("data");
                                     Intent intent = new Intent(ZeusMainActivity.this, MainMenuActivity.class);
                                     startActivity(intent);
                                 }
