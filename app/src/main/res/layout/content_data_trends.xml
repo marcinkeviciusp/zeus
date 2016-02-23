@@ -13,4 +13,46 @@
     tools:showIn="@layout/activity_data_trends">
 
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Light"
+        android:id="@+id/btnLight"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Temp"
+        android:id="@+id/btnTemp"
+        android:layout_below="@+id/btnLight"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/btnLight"
+        android:layout_alignEnd="@+id/btnLight" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Accel"
+        android:id="@+id/btnAccel"
+        android:layout_below="@+id/btnTemp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/btnTemp"
+        android:layout_alignEnd="@+id/btnTemp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Battery"
+        android:id="@+id/btnBattery"
+        android:layout_below="@+id/btnAccel"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/btnAccel"
+        android:layout_alignEnd="@+id/btnAccel" />
 </RelativeLayout>
