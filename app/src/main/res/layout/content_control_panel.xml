@@ -12,12 +12,4 @@
     tools:context="jalp.zeus.ControlPanelActivity"
     tools:showIn="@layout/activity_control_panel">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="DAS ISH COTROLEN PANELEN"
-        android:id="@+id/textView2"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
 </RelativeLayout>

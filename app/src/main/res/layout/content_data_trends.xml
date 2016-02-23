@@ -12,13 +12,5 @@
     tools:context="jalp.zeus.DataTrendsActivity"
     tools:showIn="@layout/activity_data_trends">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="DAS ICT DATA TRENDEN"
-        android:id="@+id/textView3"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="193dp" />
+
 </RelativeLayout>
