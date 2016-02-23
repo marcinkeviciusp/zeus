@@ -48,7 +48,7 @@ public class MainMenuActivity extends AppCompatActivity {
 
         buttonRoom.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(MainMenuActivity.this, ControlPanelActivity.class));
+                startActivity(new Intent(MainMenuActivity.this, RoomActivity.class));
             }
         });
         /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
