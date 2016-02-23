@@ -9,4 +9,8 @@
     <string name="title_activity_dash_board">DashBoardActivity</string>
     <string name="title_activity_control_panel">ControlPanelActivity</string>
     <string name="title_activity_data_trends">DataTrendsActivity</string>
+    <string name="title_activity_graph_light">GraphLightActivity</string>
+    <string name="title_activity_graph_temp">GraphTempActivity</string>
+    <string name="title_activity_graph_accel">GraphAccelActivity</string>
+    <string name="title_activity_graph_battery">GraphBatteryActivity</string>
 </resources>
