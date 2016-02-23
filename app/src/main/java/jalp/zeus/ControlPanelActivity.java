@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.SeekBar;
 
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.FirebaseError;
@@ -17,6 +18,13 @@ public class ControlPanelActivity extends AppCompatActivity {
     RadioGroup radioGroupTemperatures;
     RadioGroup radioGroupBases;
     Button buttonBoilOrStop;
+
+    SeekBar seekBarEasybulbBrightness;
+    SeekBar seekBarEasybulbColour;
+    Button buttonEasybulbOn;
+    Button buttonEasybulbOff;
+    Button buttonEasybulbWhite;
+    RadioGroup radioGroupEasybulbGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +42,7 @@ public class ControlPanelActivity extends AppCompatActivity {
         ZeusMainActivity.ROOT.child("bases").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot baseEntry : dataSnapshot.getChildren()) {
+                for (DataSnapshot baseEntry : dataSnapshot.getChildren()) {
                     RadioButton btn = new RadioButton(ControlPanelActivity.this);
                     radioGroupBases.addView(btn);
                     btn.setText(baseEntry.getKey());
@@ -47,12 +55,11 @@ public class ControlPanelActivity extends AppCompatActivity {
             }
         });
 
-        ZeusMainActivity.ROOT.child("kettleFeedback").addValueEventListener(new ValueEventListener()
-        {
+        ZeusMainActivity.ROOT.child("kettleFeedback").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String value = dataSnapshot.getValue(String.class);
-                if(value != null) {
+                if (value != null) {
                     if (value.endsWith("Set") || value.equals("Turned_On") || value.equals("Warm_Selected") || value.equals("Warm_5_Min") || value.equals("Warm_10_Min") || value.equals("Warm_20_Min")) {
                         kettleBoiling[0] = true;
                         buttonBoilOrStop.setText("STOP");
@@ -71,16 +78,82 @@ public class ControlPanelActivity extends AppCompatActivity {
 
         buttonBoilOrStop.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Button selectedBase = (RadioButton) findViewById(radioGroupBases.getCheckedRadioButtonId());
-                String baseName = selectedBase.getText().toString();
+                String baseName = getSelectedBase();
                 Button selectedTemp = (RadioButton) findViewById(radioGroupTemperatures.getCheckedRadioButtonId());
                 String temp = selectedTemp.getText().toString().split(" ")[0]; // removes the degrees C
-
                 ZeusMainActivity.ROOT.child("bases").child(baseName).setValue(baseName + " KETTLE " + (kettleBoiling[0] ? "OFF" : ("BOIL " + temp)));
             }
         });
 
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
+        // START EASYBULB HERE
+
+        seekBarEasybulbBrightness = (SeekBar) findViewById(R.id.seekBarEasybulbBrightness);
+        seekBarEasybulbColour = (SeekBar) findViewById(R.id.seekBarEasybulbColour);
+        buttonEasybulbOn = (Button) findViewById(R.id.buttonEasybulbOn);
+        buttonEasybulbOff = (Button) findViewById(R.id.buttonEasybulbOff);
+        buttonEasybulbWhite = (Button) findViewById(R.id.buttonEasybulbWhite);
+        radioGroupEasybulbGroup = (RadioGroup) findViewById(R.id.radioGroupEasybulbGroup);
+
+        buttonEasybulbOn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                String baseName = getSelectedBase();
+                ZeusMainActivity.ROOT.child("bases").child(baseName).setValue(baseName + " EASYBULB ON " + getSelectedEasybulbGroupCapitalised());
+            }
+        });
+
+        buttonEasybulbOff.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                String baseName = getSelectedBase();
+                ZeusMainActivity.ROOT.child("bases").child(baseName).setValue(baseName + " EASYBULB OFF " + getSelectedEasybulbGroupCapitalised());
+            }
+        });
+
+        buttonEasybulbWhite.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                String baseName = getSelectedBase();
+                ZeusMainActivity.ROOT.child("bases").child(baseName).setValue(baseName + " EASYBULB WHITE " + getSelectedEasybulbGroupCapitalised());
+            }
+        });
+
+        seekBarEasybulbBrightness.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                String baseName = getSelectedBase();
+                ZeusMainActivity.ROOT.child("bases").child(baseName).setValue(baseName + " EASYBULB BRIGHTNESS " + getSelectedEasybulbGroupCapitalised() + " " + (progress - 128));
+            }
+        });
+
+        seekBarEasybulbColour.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            public void onStopTrackingTouch(SeekBar seekBar) {}
+            public void onStartTrackingTouch(SeekBar seekBar) {}
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                String baseName = getSelectedBase();
+                ZeusMainActivity.ROOT.child("bases").child(baseName).setValue(baseName + " EASYBULB COLOUR " + getSelectedEasybulbGroupCapitalised() + " " + (progress - 128));
+            }
+        });
+    }
+
+    private String getSelectedBase()
+    {
+        Button selectedBase = (RadioButton) findViewById(radioGroupBases.getCheckedRadioButtonId());
+        return selectedBase.getText().toString();
+    }
+
+    private String getSelectedEasybulbGroupCapitalised()
+    {
+        RadioButton selectedBase = (RadioButton) findViewById(radioGroupEasybulbGroup.getCheckedRadioButtonId());
+        return selectedBase.getText().toString().toUpperCase();
+    }
+}
+
+
+/*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,5 +161,3 @@ public class ControlPanelActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });*/
-    }
-}
