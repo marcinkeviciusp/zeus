@@ -35,6 +35,10 @@
         <activity
             android:name=".DataTrendsActivity"
             android:label="@string/title_activity_data_trends"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".GraphLightActivity"
+            android:label="@string/title_activity_graph_light"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
