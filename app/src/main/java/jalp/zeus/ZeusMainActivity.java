@@ -76,7 +76,7 @@ public class ZeusMainActivity extends AppCompatActivity
                     @Override
                     public void onDataChange(DataSnapshot snapshot) {
                         if (snapshot.exists()) {
-                            final Firebase firebaseUserRef = new Firebase("https://sunsspot.firebaseio.com/").child(snapshot.getValue(String.class));
+                            final Firebase firebaseUserRef = new Firebase("https://sunsspot.firebaseio.com/users/").child(snapshot.getValue(String.class));
                             firebaseUserRef.authWithPassword(email, password, new Firebase.AuthResultHandler() {
                                 public void onAuthenticated(AuthData authData) {
                                     spinnerLoggingIn.setVisibility(View.INVISIBLE);
