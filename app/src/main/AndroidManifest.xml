@@ -39,6 +39,18 @@
         <activity
             android:name=".GraphLightActivity"
             android:label="@string/title_activity_graph_light"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".GraphTempActivity"
+            android:label="@string/title_activity_graph_temp"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".GraphAccelActivity"
+            android:label="@string/title_activity_graph_accel"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".GraphBatteryActivity"
+            android:label="@string/title_activity_graph_battery"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

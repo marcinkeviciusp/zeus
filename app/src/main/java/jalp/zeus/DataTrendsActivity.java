@@ -12,6 +12,9 @@ import android.widget.Button;
 public class DataTrendsActivity extends AppCompatActivity {
 
     Button mBtnLight;
+    Button mBtnTemp;
+    Button mBtnAccel;
+    Button mBtnBattery;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,10 +24,28 @@ public class DataTrendsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         mBtnLight = (Button) findViewById(R.id.btnLight);
+        mBtnTemp = (Button) findViewById(R.id.btnTemp);
+        mBtnAccel = (Button) findViewById(R.id.btnAccel);
+        mBtnBattery = (Button) findViewById(R.id.btnBattery);
 
         mBtnLight.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startActivity(new Intent(DataTrendsActivity.this, GraphLightActivity.class));
+            }
+        });
+        mBtnTemp.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(DataTrendsActivity.this, GraphTempActivity.class));
+            }
+        });
+        mBtnAccel.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(DataTrendsActivity.this, GraphAccelActivity.class));
+            }
+        });
+        mBtnBattery.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(DataTrendsActivity.this, GraphBatteryActivity.class));
             }
         });
     }
