@@ -12,16 +12,82 @@
     tools:context="jalp.zeus.ControlPanelActivity"
     tools:showIn="@layout/activity_control_panel">
 
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="330dp"
+        android:id="@+id/relativeLayout">
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"></FrameLayout>
-    </FrameLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Kettle"
+            android:id="@+id/textKettleTitle"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignRight="@+id/buttonStopKettle"
+            android:layout_alignEnd="@+id/buttonStopKettle" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BOIL"
+            android:id="@+id/buttonStopKettle"
+            android:layout_below="@+id/textKettleTitle"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="65 °C"
+            android:id="@+id/radioButtonKettle65"
+            android:layout_alignTop="@+id/buttonStopKettle"
+            android:layout_centerHorizontal="true"
+            android:checked="false" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="80 °C"
+            android:id="@+id/radioButtonKettle80"
+            android:layout_below="@+id/radioButtonKettle65"
+            android:layout_alignLeft="@+id/radioButtonKettle65"
+            android:layout_alignStart="@+id/radioButtonKettle65"
+            android:checked="false" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="95 °C"
+            android:id="@+id/radioButtonKettle95"
+            android:layout_below="@+id/radioButtonKettle80"
+            android:layout_alignLeft="@+id/radioButtonKettle80"
+            android:layout_alignStart="@+id/radioButtonKettle80"
+            android:checked="false" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100 °C"
+            android:id="@+id/radioButtonKettle100"
+            android:layout_below="@+id/radioButtonKettle95"
+            android:layout_alignLeft="@+id/radioButtonKettle95"
+            android:layout_alignStart="@+id/radioButtonKettle95"
+            android:checked="true" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignTop="@+id/relativeLayout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="230dp"></RelativeLayout>
 </RelativeLayout>
