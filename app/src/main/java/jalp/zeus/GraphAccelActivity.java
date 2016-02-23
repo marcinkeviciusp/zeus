@@ -12,7 +12,7 @@ public class GraphAccelActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_graph_accel);
+        setContentView(R.layout.activity_graph_accel); //Testing
 
     }
 
