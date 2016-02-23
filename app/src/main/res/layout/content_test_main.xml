@@ -71,4 +71,15 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
+    <ProgressBar
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinnerLoggingIn"
+        android:max="100"
+        android:progress="0"
+        android:indeterminate="true"
+        android:layout_alignTop="@+id/buttonLogIn"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>
