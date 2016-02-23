@@ -30,57 +30,33 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_alignRight="@+id/buttonStopKettle"
-            android:layout_alignEnd="@+id/buttonStopKettle" />
+            android:layout_alignRight="@+id/buttonBoilStopKettle"
+            android:layout_alignEnd="@+id/buttonBoilStopKettle" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="BOIL"
-            android:id="@+id/buttonStopKettle"
+            android:id="@+id/buttonBoilStopKettle"
             android:layout_below="@+id/textKettleTitle"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
-        <RadioButton
-            android:layout_width="wrap_content"
+        <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="65 °C"
-            android:id="@+id/radioButtonKettle65"
-            android:layout_alignTop="@+id/buttonStopKettle"
-            android:layout_centerHorizontal="true"
-            android:checked="false" />
+            android:orientation="vertical"
+            android:id="@+id/radioGroupBases"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/textKettleTitle"
+            android:layout_toEndOf="@+id/textKettleTitle"
+            android:layout_marginLeft="32dp"
+            android:layout_marginStart="32dp">
 
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="80 °C"
-            android:id="@+id/radioButtonKettle80"
-            android:layout_below="@+id/radioButtonKettle65"
-            android:layout_alignLeft="@+id/radioButtonKettle65"
-            android:layout_alignStart="@+id/radioButtonKettle65"
-            android:checked="false" />
+        </RadioGroup><![CDATA[
 
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="95 °C"
-            android:id="@+id/radioButtonKettle95"
-            android:layout_below="@+id/radioButtonKettle80"
-            android:layout_alignLeft="@+id/radioButtonKettle80"
-            android:layout_alignStart="@+id/radioButtonKettle80"
-            android:checked="false" />
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="100 °C"
-            android:id="@+id/radioButtonKettle100"
-            android:layout_below="@+id/radioButtonKettle95"
-            android:layout_alignLeft="@+id/radioButtonKettle95"
-            android:layout_alignStart="@+id/radioButtonKettle95"
-            android:checked="true" />
-
+        RadioGroup>
+    ]]>
     </RelativeLayout>
 
     <RelativeLayout
@@ -89,5 +65,67 @@
         android:layout_alignTop="@+id/relativeLayout"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="230dp"></RelativeLayout>
+        android:layout_marginTop="230dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="EasyBulb"
+            android:id="@+id/textEasybulbHeader"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+    </RelativeLayout>
+
+    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/radioGroupTemperatures"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="274dp"
+        android:layout_marginStart="274dp">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="65 °C"
+            android:id="@+id/radioButton"
+            android:layout_alignTop="@+id/buttonBoilStopKettle"
+            android:layout_centerHorizontal="true"
+            android:checked="false" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="80 °C"
+            android:id="@+id/radioButton2"
+            android:layout_below="@+id/radioButton"
+            android:layout_alignLeft="@+id/radioButton"
+            android:layout_alignStart="@+id/radioButton"
+            android:checked="false" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="95 °C"
+            android:id="@+id/radioButton3"
+            android:layout_below="@+id/radioButton2"
+            android:layout_alignLeft="@+id/radioButton2"
+            android:layout_alignStart="@+id/radioButton2"
+            android:checked="false" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100 °C"
+            android:id="@+id/radioButton4"
+            android:layout_below="@+id/radioButton3"
+            android:layout_alignLeft="@+id/radioButton3"
+            android:layout_alignStart="@+id/radioButton3"
+            android:checked="true" />
+    </RadioGroup>
 </RelativeLayout>
