@@ -22,8 +22,8 @@ public class MainMenuActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        buttonDataTrends =(Button) findViewById(R.id.buttonDataTrends);
-        buttonDashBoard =(Button) findViewById(R.id.buttonDashboard);
+        buttonDataTrends = (Button) findViewById(R.id.buttonDataTrends);
+        buttonDashBoard = (Button) findViewById(R.id.buttonDashboard);
         buttonControlPanel = (Button) findViewById(R.id.buttonControlPanel);
 
         buttonDataTrends.setOnClickListener(new View.OnClickListener() {

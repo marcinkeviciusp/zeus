@@ -1,13 +1,22 @@
 package jalp.zeus;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 
 public class ControlPanelActivity extends AppCompatActivity {
+
+    RadioGroup radioGroupTemperatures;
+    RadioGroup radioGroupBases;
+    Button buttonBoilOrStop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,6 +24,61 @@ public class ControlPanelActivity extends AppCompatActivity {
         setContentView(R.layout.activity_control_panel);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        radioGroupTemperatures = (RadioGroup) findViewById(R.id.radioGroupTemperatures);
+        radioGroupBases = (RadioGroup) findViewById(R.id.radioGroupBases);
+        buttonBoilOrStop = (Button) findViewById(R.id.buttonBoilStopKettle);
+
+        final boolean kettleBoiling[] = {false};
+
+        ZeusMainActivity.ROOT.child("bases").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot baseEntry : dataSnapshot.getChildren()) {
+                    RadioButton btn = new RadioButton(ControlPanelActivity.this);
+                    radioGroupBases.addView(btn);
+                    btn.setText(baseEntry.getKey());
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                buttonBoilOrStop.setText("Error: Firebase Inaccesible");
+            }
+        });
+
+        ZeusMainActivity.ROOT.child("kettleFeedback").addValueEventListener(new ValueEventListener()
+        {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String value = dataSnapshot.getValue(String.class);
+                if(value != null) {
+                    if (value.endsWith("Set") || value.equals("Turned_On") || value.equals("Warm_Selected") || value.equals("Warm_5_Min") || value.equals("Warm_10_Min") || value.equals("Warm_20_Min")) {
+                        kettleBoiling[0] = true;
+                        buttonBoilOrStop.setText("STOP");
+                    } else if (value.equals("Turned_Off") || value.equals("Problem") || value.equals("Kettle_Removed_While_On") || value.equals("Reached_Temp") || value.equals("Warm_Ended")) {
+                        kettleBoiling[0] = false;
+                        buttonBoilOrStop.setText("BOIL");
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                buttonBoilOrStop.setText("Error: Firebase Inaccesible");
+            }
+        });
+
+        buttonBoilOrStop.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Button selectedBase = (RadioButton) findViewById(radioGroupBases.getCheckedRadioButtonId());
+                String baseName = selectedBase.getText().toString();
+                Button selectedTemp = (RadioButton) findViewById(radioGroupTemperatures.getCheckedRadioButtonId());
+                String temp = selectedTemp.getText().toString().split(" ")[0]; // removes the degrees C
+
+                ZeusMainActivity.ROOT.child("bases").child(baseName).setValue(baseName + " KETTLE " + (kettleBoiling[0] ? "OFF" : ("BOIL " + temp)));
+            }
+        });
 
         /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
