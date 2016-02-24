@@ -18,7 +18,8 @@
             android:layout_height="match_parent"
             android:text="Light"
             android:elegantTextHeight="false"
-            android:textSize="40sp" />
+            android:textSize="40sp"
+            android:gravity="center" />
 
     </android.support.design.widget.AppBarLayout>
 

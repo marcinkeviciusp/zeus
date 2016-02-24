@@ -48,30 +48,6 @@ public class ControlPanelActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawerList = (ListView) findViewById(R.id.left_drawer);
-        drawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, zeusSections));
-
-        drawerList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch((int)id)
-                {
-                    case 0:
-                        startActivity(new Intent(ControlPanelActivity.this, DashBoardActivity.class));
-                        break;
-                    case 1:
-                        //startActivity(new Intent(ControlPanelActivity.this, ControlPanelActivity.class));
-                        break;
-                    case 2:
-                        startActivity(new Intent(ControlPanelActivity.this, DataTrendsActivity.class));
-                        break;
-                }
-            }
-        });
-
-        //drawerLayout.openDrawer(drawerList);
-
-
         radioGroupTemperatures = (RadioGroup) findViewById(R.id.radioGroupTemperatures);
         radioGroupBases = (RadioGroup) findViewById(R.id.radioGroupBases);
         buttonBoilOrStop = (Button) findViewById(R.id.buttonBoilStopKettle);
@@ -141,24 +117,24 @@ public class ControlPanelActivity extends AppCompatActivity {
         buttonEasybulbOn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String baseName = getSelectedBase();
-                if(baseName != null)
-                  ZeusMainActivity.ROOT.child("bases").child(baseName).setValue(baseName + " EASYBULB ON " + getSelectedEasybulbGroupCapitalised());
+                if (baseName != null)
+                    ZeusMainActivity.ROOT.child("bases").child(baseName).setValue(baseName + " EASYBULB ON " + getSelectedEasybulbGroupCapitalised());
             }
         });
 
         buttonEasybulbOff.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String baseName = getSelectedBase();
-                if(baseName != null)
-                  ZeusMainActivity.ROOT.child("bases").child(baseName).setValue(baseName + " EASYBULB OFF " + getSelectedEasybulbGroupCapitalised());
+                if (baseName != null)
+                    ZeusMainActivity.ROOT.child("bases").child(baseName).setValue(baseName + " EASYBULB OFF " + getSelectedEasybulbGroupCapitalised());
             }
         });
 
         buttonEasybulbWhite.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String baseName = getSelectedBase();
-                if(baseName != null)
-                  ZeusMainActivity.ROOT.child("bases").child(baseName).setValue(baseName + " EASYBULB WHITE " + getSelectedEasybulbGroupCapitalised());
+                if (baseName != null)
+                    ZeusMainActivity.ROOT.child("bases").child(baseName).setValue(baseName + " EASYBULB WHITE " + getSelectedEasybulbGroupCapitalised());
             }
         });
 
@@ -171,18 +147,42 @@ public class ControlPanelActivity extends AppCompatActivity {
 
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 String baseName = getSelectedBase();
-                if(baseName != null)
-                  ZeusMainActivity.ROOT.child("bases").child(baseName).setValue(baseName + " EASYBULB BRIGHTNESS " + getSelectedEasybulbGroupCapitalised() + " " + (progress - 128));
+                if (baseName != null)
+                    ZeusMainActivity.ROOT.child("bases").child(baseName).setValue(baseName + " EASYBULB BRIGHTNESS " + getSelectedEasybulbGroupCapitalised() + " " + (progress - 128));
             }
         });
 
         seekBarEasybulbColour.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            public void onStopTrackingTouch(SeekBar seekBar) {}
-            public void onStartTrackingTouch(SeekBar seekBar) {}
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 String baseName = getSelectedBase();
-                if(baseName != null)
-                  ZeusMainActivity.ROOT.child("bases").child(baseName).setValue(baseName + " EASYBULB COLOUR " + getSelectedEasybulbGroupCapitalised() + " " + (progress - 128));
+                if (baseName != null)
+                    ZeusMainActivity.ROOT.child("bases").child(baseName).setValue(baseName + " EASYBULB COLOUR " + getSelectedEasybulbGroupCapitalised() + " " + (progress - 128));
+            }
+        });
+
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_control_panel);
+        drawerList = (ListView) findViewById(R.id.left_drawer_control_panel);
+        drawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, zeusSections));
+
+        drawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch ((int) id) {
+                    case 0:
+                        startActivity(new Intent(ControlPanelActivity.this, DashBoardActivity.class));
+                        break;
+                    case 1:
+                        //startActivity(new Intent(ControlPanelActivity.this, ControlPanelActivity.class));
+                        break;
+                    case 2:
+                        startActivity(new Intent(ControlPanelActivity.this, DataTrendsActivity.class));
+                        break;
+                }
             }
         });
     }

@@ -24,7 +24,8 @@
                 android:layout_height="match_parent"
                 android:text="Data Trends"
                 android:elegantTextHeight="false"
-                android:textSize="40dp" />
+                android:textSize="40dp"
+                android:gravity="center" />
 
             </android.support.v7.widget.Toolbar>
 

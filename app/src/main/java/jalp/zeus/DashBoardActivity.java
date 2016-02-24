@@ -8,12 +8,16 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -26,6 +30,15 @@ import com.firebase.client.FirebaseError;
 
 public class DashBoardActivity extends AppCompatActivity {
 
+    // side menu
+    String[] zeusSections = new String[]{
+            "Dashboard",
+            "Control Panel",
+            "Data Trends"
+    };
+    DrawerLayout drawerLayout;
+    ListView drawerList;
+    // side menu end
 
     public static String room;
     @Override
@@ -60,10 +73,11 @@ public class DashBoardActivity extends AppCompatActivity {
                 card.setMinimumHeight(150);
                 card.setClickable(true);
                 card.setOnClickListener(new View.OnClickListener() {
-                    @Override public void onClick(View v) {
+                    @Override
+                    public void onClick(View v) {
                         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>");
                         for (DataSnapshot data : snapshot.getChildren()) {
-                            if(data.getKey().equals("name")){
+                            if (data.getKey().equals("name")) {
                                 room = data.getValue(String.class);
                             }
                         }
@@ -79,7 +93,7 @@ public class DashBoardActivity extends AppCompatActivity {
                 card.addView(container);
 
                 for (DataSnapshot data : snapshot.getChildren()) {
-                    if(data.getKey().equals("name")){
+                    if (data.getKey().equals("name")) {
                         TextView roomDescription = new TextView(context);
                         roomDescription.setText(data.getValue(String.class));
                         roomDescription.setTextSize(30);
@@ -88,7 +102,7 @@ public class DashBoardActivity extends AppCompatActivity {
                         container.addView(roomDescription);
 
 
-                    }else if(data.getKey().equals("description")){
+                    } else if (data.getKey().equals("description")) {
                         //System.out.println(">>>>>>>>>>>>>>>>>>>>>>> Description: " + data.getValue(String.class));
 
                         TextView roomName = new TextView(context);
@@ -107,8 +121,6 @@ public class DashBoardActivity extends AppCompatActivity {
                         container.addView(divider);
 
                     }
-
-
 
 
                 }
@@ -131,9 +143,29 @@ public class DashBoardActivity extends AppCompatActivity {
             public void onCancelled(FirebaseError err) {
 
             }
-
-
         });
+
+        // side menu
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_dashboard);
+        drawerList = (ListView) findViewById(R.id.left_drawer_dashboard);
+        drawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, zeusSections));
+
+        drawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch ((int) id) {
+                    case 0:
+                        //startActivity(new Intent(DashBoardActivity.this, DashBoardActivity.class));
+                        break;
+                    case 1:
+                        startActivity(new Intent(DashBoardActivity.this, ControlPanelActivity.class));
+                        break;
+                    case 2:
+                        startActivity(new Intent(DashBoardActivity.this, DataTrendsActivity.class));
+                        break;
+                }
+            }
+        });
+        // side menu end
     }
 
 
