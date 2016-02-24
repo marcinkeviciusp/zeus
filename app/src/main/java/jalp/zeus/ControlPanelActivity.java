@@ -142,7 +142,8 @@ public class ControlPanelActivity extends AppCompatActivity {
             public void onStartTrackingTouch(SeekBar seekBar) {}
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 String baseName = getSelectedBase();
-                ZeusMainActivity.ROOT.child("bases").child(baseName).setValue(baseName + " EASYBULB COLOUR " + getSelectedEasybulbGroupCapitalised() + " " + (progress - 128));
+                if(baseName != null)
+                  ZeusMainActivity.ROOT.child("bases").child(baseName).setValue(baseName + " EASYBULB COLOUR " + getSelectedEasybulbGroupCapitalised() + " " + (progress - 128));
             }
         });
     }
