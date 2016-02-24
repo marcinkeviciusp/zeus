@@ -12,6 +12,7 @@ public class GraphAccelActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Notifier notificationService = new Notifier(this);
         setContentView(R.layout.activity_graph_accel); //Testing
 
     }

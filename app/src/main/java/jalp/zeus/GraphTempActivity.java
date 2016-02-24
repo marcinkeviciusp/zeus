@@ -13,6 +13,7 @@ public class GraphTempActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph_temp);
+        Notifier notificationService = new Notifier(this);
     }
 
 }
