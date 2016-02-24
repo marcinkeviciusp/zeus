@@ -21,10 +21,8 @@ import java.util.Date;
 
 public class GraphLightActivity extends AppCompatActivity {
 
-    ListView mLightListView;
-    TableLayout mTableLayout;
     Firebase mRef;
-
+    protected String graphType = "light";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +62,7 @@ public class GraphLightActivity extends AppCompatActivity {
                     ZeusMainActivity.ROOT.child("readings").child(spots.get(i)).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            if (dataSnapshot.hasChild("light")) {
+                            if (dataSnapshot.hasChild(graphType)) {
                                 points[finalI] = new ArrayList<>();
                                 plot(points[finalI], graph, spots.get(finalI));
                             }
@@ -87,29 +85,9 @@ public class GraphLightActivity extends AppCompatActivity {
 
     }
 
-    protected void childExists(final String spotName) {
-
-        ZeusMainActivity.ROOT.child("readings").child(spotName).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.hasChild("light")) {
-
-                }
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-
-            }
-        });
-
-
-    }
-
-    ;
 
     protected void plot(final ArrayList<DataPoint> points, final GraphView graph, String spotName) {
-        ZeusMainActivity.ROOT.child("readings").child(spotName).child("light").addListenerForSingleValueEvent(new ValueEventListener() {
+        ZeusMainActivity.ROOT.child("readings").child(spotName).child(graphType).addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
