@@ -60,7 +60,11 @@ public class DashBoardActivity extends AppCompatActivity {
                 card.setOnClickListener(new View.OnClickListener() {
                     @Override public void onClick(View v) {
                         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>");
-                        room = snapshot.getKey();
+                        for (DataSnapshot data : snapshot.getChildren()) {
+                            if(data.getKey().equals("name")){
+                                room = data.getValue(String.class);
+                            }
+                        }
                         startActivity(new Intent(DashBoardActivity.this, RoomActivity.class));
                         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>");
                     }
