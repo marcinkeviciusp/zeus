@@ -1,10 +1,15 @@
 package jalp.zeus;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
@@ -26,12 +31,45 @@ public class ControlPanelActivity extends AppCompatActivity {
     Button buttonEasybulbWhite;
     RadioGroup radioGroupEasybulbGroup;
 
+    String[] zeusSections = new String[]{
+            "Dashboard",
+            "Control Panel",
+            "Data Trends"
+    };
+    DrawerLayout drawerLayout;
+    ListView drawerList;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_control_panel);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawerList = (ListView) findViewById(R.id.left_drawer);
+        drawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, zeusSections));
+
+        drawerList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch((int)id)
+                {
+                    case 0:
+                        startActivity(new Intent(ControlPanelActivity.this, DashBoardActivity.class));
+                        break;
+                    case 1:
+                        //startActivity(new Intent(ControlPanelActivity.this, ControlPanelActivity.class));
+                        break;
+                    case 2:
+                        startActivity(new Intent(ControlPanelActivity.this, DataTrendsActivity.class));
+                        break;
+                }
+            }
+        });
+
+        //drawerLayout.openDrawer(drawerList);
+
 
         radioGroupTemperatures = (RadioGroup) findViewById(R.id.radioGroupTemperatures);
         radioGroupBases = (RadioGroup) findViewById(R.id.radioGroupBases);
