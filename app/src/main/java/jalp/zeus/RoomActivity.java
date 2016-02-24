@@ -89,6 +89,28 @@ public class RoomActivity extends AppCompatActivity {
 
                         divider.setBackgroundColor(Color.LTGRAY);
                         container.addView(divider);
+                    }else if(data.getKey().equals("battery")){
+                        TextView spotBattery = new TextView(context);
+                        spotBattery.setText("Battery Level: " + data.getValue(String.class));
+                        if(data.getValue(Double.class)>25) {
+                            spotBattery.setTextColor(Color.GREEN);
+                        }else if(data.getValue(Double.class)>10){
+                            spotBattery.setTextColor(Color.YELLOW);
+                        }else{
+                            spotBattery.setTextColor(Color.RED);
+                        }
+                        spotBattery.setTextSize(15);
+
+                        container.addView(spotBattery);
+
+                        View divider = new View(context);
+                        divider.setLayoutParams(new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.MATCH_PARENT,
+                                3
+                        ));
+
+                        divider.setBackgroundColor(Color.LTGRAY);
+                        container.addView(divider);
                     }
                 }
             }
