@@ -56,7 +56,9 @@ public class RoomActivity extends AppCompatActivity {
                 card.setMinimumWidth(screen.getWidth());
                 card.setMinimumHeight(150);
                 card.setClickable(false);
+                card.setId(nameToID(snapshot.getKey()));
                 lL.addView(card);
+
 
 
                 //RelativeLayout container = new RelativeLayout(context);
@@ -112,16 +114,46 @@ public class RoomActivity extends AppCompatActivity {
 
                         divider.setBackgroundColor(Color.LTGRAY);
                         container.addView(divider);
+                    }else if(data.getKey().equals("liveData")){
+                        TextView spotType = new TextView(context);
+                        spotType.setText(typeReader(data.getValue(String.class)));
+                        spotType.setTextSize(15);
+
+                        container.addView(spotType);
+
+                        View divider = new View(context);
+                        divider.setLayoutParams(new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.MATCH_PARENT,
+                                3
+                        ));
+
+                        divider.setBackgroundColor(Color.LTGRAY);
+                        container.addView(divider);
                     }
                 }
             }
 
             public void onChildRemoved(DataSnapshot snapshot) {
-
+                CardView card = (CardView)lL.findViewById(nameToID(snapshot.getKey()));
+                lL.removeView(card);
             }
 
             public void onChildChanged(DataSnapshot snapshot, String someString) {
+                boolean roomChanged = false;
+                int id = nameToID(snapshot.getKey());
+                CardView card = (CardView)lL.findViewById(id);
 
+                for (DataSnapshot data : snapshot.getChildren()) {
+                    if (data.getKey().equals("room")) {
+                        if(!data.getValue(String.class).equals(DashBoardActivity.room)){
+                            roomChanged = true;
+                        }
+                    }
+                }
+
+                if(roomChanged){
+                    lL.removeView(card);
+                }
             }
 
             public void onChildMoved(DataSnapshot snapshot, String someString) {
@@ -141,4 +173,49 @@ public class RoomActivity extends AppCompatActivity {
         System.out.println("###############################");
     }
 
+    private static String typeReader(String dataString){
+        String returner = "Types: ";
+        for(int i=0;i<dataString.length();i++){
+            if(i==(dataString.length()-1)){
+                returner += typeSwitch(dataString.charAt(i))+".";
+            }else {
+                returner += typeSwitch(dataString.charAt(i))+", ";
+            }
+        }
+        return returner;
+    }
+
+    private static String typeSwitch(char character){
+        switch(character){
+            case 'c':
+                return "Compass";
+            case 't':
+                return "Temperature";
+            case 'l':
+                return "Light";
+            case 'a':
+                return "Acceleration";
+            case 'b':
+                return "Left Button";
+            case 'r':
+                return "Right Button";
+            case 's':
+                return "Sound";
+            case 'e':
+                return "Battery";
+            case 'i':
+                return "Infrared";
+        }
+        return null;
+    }
+
+    private static int nameToID(String name){
+        String idString = "";
+
+        for(int i=0;i<name.length();i++){
+            idString += (int)name.charAt(i);
+        }
+
+        return Integer.parseInt(idString,10);
+    }
 }
