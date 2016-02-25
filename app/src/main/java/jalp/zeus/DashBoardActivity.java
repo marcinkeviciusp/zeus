@@ -38,13 +38,24 @@ public class DashBoardActivity extends AppCompatActivity {
     };
     DrawerLayout drawerLayout;
     ListView drawerList;
+    static Notifier notificationService;
     // side menu end
 
     public static String room;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Notifier notificationService = new Notifier(this);
+        if(!Notifier.created){
+            System.out.println("##############################################################");
+            System.out.println("##############################################################");
+            System.out.println("##############################################################");
+            System.out.println("<<<<<<<<<<<<<<<<<<<<<< CREATING NOTIFICATION SERVICE");
+            System.out.println("##############################################################");
+            System.out.println("##############################################################");
+            System.out.println("##############################################################");
+            notificationService = new Notifier(this);
+        }
+
 
         setContentView(R.layout.activity_dash_board);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

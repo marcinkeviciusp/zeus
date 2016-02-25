@@ -32,7 +32,7 @@ public class GraphTempActivity extends AppCompatActivity {
         final ArrayList<String> spots = new ArrayList<>();
         final ArrayList<DataPoint>[] points = new ArrayList[10];
         final GraphView graph = (GraphView) findViewById(R.id.graphTemp);
-        Notifier notificationService = new Notifier(this);
+        //Notifier notificationService = new Notifier(this);
         ZeusMainActivity.ROOT.child("readings").addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override
