@@ -1,5 +1,7 @@
 package jalp.zeus;
 
+import android.app.Fragment;
+
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,11 +14,12 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.series.BarGraphSeries;
+import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
@@ -121,12 +124,15 @@ public class GraphLightActivity extends AppCompatActivity {
                 for (DataSnapshot entry : dataSnapshot.getChildren()) {
                     Timestamp stamp = new Timestamp(Long.parseLong(entry.getKey()));
                     Date date = stamp;
+                    System.out.println("date: " + date.getTime());
                     points.add(new DataPoint(date, entry.getValue(Double.class)));
                 }
 
                 DataPoint[] dbPoint = points.toArray(new DataPoint[points.size()]);
                 LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(dbPoint);
                 graph.addSeries(series);
+                graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(GraphLightActivity.this, DateFormat.getTimeInstance()));
+                graph.getGridLabelRenderer().setNumHorizontalLabels(3); // only 4 because of the space
 
                 if (seriesNumber == 0) {
                     series.setColor(Color.BLUE);
@@ -146,5 +152,6 @@ public class GraphLightActivity extends AppCompatActivity {
             }
         });
     }
+
 
 }

@@ -15,10 +15,12 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
@@ -113,6 +115,8 @@ public class GraphBatteryActivity extends AppCompatActivity {
                 DataPoint[] dbPoint = points.toArray(new DataPoint[points.size()]);
                 LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(dbPoint);
                 graph.addSeries(series);
+                graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(GraphBatteryActivity.this, DateFormat.getTimeInstance()));
+                graph.getGridLabelRenderer().setNumHorizontalLabels(3); // only 4 because of the space
 
                 if (seriesNumber == 0) {
                     series.setColor(Color.BLUE);
