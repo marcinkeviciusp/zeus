@@ -134,6 +134,7 @@ public class GraphLightActivity extends AppCompatActivity {
                 graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(GraphLightActivity.this, DateFormat.getTimeInstance()));
                 graph.getGridLabelRenderer().setNumHorizontalLabels(3); // only 4 because of the space
 
+
                 if (seriesNumber == 0) {
                     series.setColor(Color.BLUE);
                 } else if (seriesNumber == 1) {
@@ -143,6 +144,9 @@ public class GraphLightActivity extends AppCompatActivity {
                 } else {
                     series.setColor(Color.YELLOW);
                 }
+                series.setDrawBackground(true);
+                series.setDrawDataPoints(true);
+
                 seriesNumber++;
             }
 

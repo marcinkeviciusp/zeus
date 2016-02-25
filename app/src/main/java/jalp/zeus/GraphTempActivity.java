@@ -126,6 +126,9 @@ public class GraphTempActivity extends AppCompatActivity {
                 } else {
                     series.setColor(Color.YELLOW);
                 }
+                series.setDrawBackground(true);
+                series.setDrawDataPoints(true);
+
                 seriesNumber++;
             }
 
