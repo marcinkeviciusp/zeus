@@ -60,27 +60,27 @@ public class ControlPanelActivity extends AppCompatActivity {
                     RadioButton btn = new RadioButton(ControlPanelActivity.this);
                     radioGroupBases.addView(btn);
                     btn.setText(baseEntry.getKey());
-                }
-            }
 
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-                buttonBoilOrStop.setText("Error: Firebase Inaccesible");
-            }
-        });
+                    ZeusMainActivity.ROOT.child("bases").child(baseEntry.getKey()).child("kettle").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            String value = dataSnapshot.getValue(String.class);
+                            if (value != null) {
+                                if (value.endsWith("Set") || value.equals("Turned_On") || value.equals("Warm_Selected") || value.equals("Warm_5_Min") || value.equals("Warm_10_Min") || value.equals("Warm_20_Min")) {
+                                    kettleBoiling[0] = true;
+                                    buttonBoilOrStop.setText("STOP");
+                                } else if (value.equals("Turned_Off") || value.equals("Problem") || value.equals("Kettle_Removed_While_On") || value.equals("Reached_Temp") || value.equals("Warm_Ended")) {
+                                    kettleBoiling[0] = false;
+                                    buttonBoilOrStop.setText("BOIL");
+                                }
+                            }
+                        }
 
-        ZeusMainActivity.ROOT.child("kettleFeedback").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String value = dataSnapshot.getValue(String.class);
-                if (value != null) {
-                    if (value.endsWith("Set") || value.equals("Turned_On") || value.equals("Warm_Selected") || value.equals("Warm_5_Min") || value.equals("Warm_10_Min") || value.equals("Warm_20_Min")) {
-                        kettleBoiling[0] = true;
-                        buttonBoilOrStop.setText("STOP");
-                    } else if (value.equals("Turned_Off") || value.equals("Problem") || value.equals("Kettle_Removed_While_On") || value.equals("Reached_Temp") || value.equals("Warm_Ended")) {
-                        kettleBoiling[0] = false;
-                        buttonBoilOrStop.setText("BOIL");
-                    }
+                        @Override
+                        public void onCancelled(FirebaseError firebaseError) {
+                            buttonBoilOrStop.setText("Error: Firebase Inaccesible");
+                        }
+                    });
                 }
             }
 
@@ -96,7 +96,7 @@ public class ControlPanelActivity extends AppCompatActivity {
                 if(baseName != null) {
                     Button selectedTemp = (RadioButton) findViewById(radioGroupTemperatures.getCheckedRadioButtonId());
                     String temp = selectedTemp.getText().toString().split(" ")[0]; // removes the degrees C
-                    ZeusMainActivity.ROOT.child("bases").child(baseName).setValue(baseName + " KETTLE " + (kettleBoiling[0] ? "OFF" : ("BOIL " + temp)));
+                    ZeusMainActivity.ROOT.child("bases").child(baseName).child("script").setValue(baseName + " KETTLE " + (kettleBoiling[0] ? "OFF" : ("BOIL " + temp)));
                 }
             }
         });
@@ -118,7 +118,7 @@ public class ControlPanelActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String baseName = getSelectedBase();
                 if (baseName != null)
-                    ZeusMainActivity.ROOT.child("bases").child(baseName).setValue(baseName + " EASYBULB ON " + getSelectedEasybulbGroupCapitalised());
+                    ZeusMainActivity.ROOT.child("bases").child(baseName).child("script").setValue(baseName + " EASYBULB ON " + getSelectedEasybulbGroupCapitalised());
             }
         });
 
@@ -126,7 +126,7 @@ public class ControlPanelActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String baseName = getSelectedBase();
                 if (baseName != null)
-                    ZeusMainActivity.ROOT.child("bases").child(baseName).setValue(baseName + " EASYBULB OFF " + getSelectedEasybulbGroupCapitalised());
+                    ZeusMainActivity.ROOT.child("bases").child(baseName).child("script").setValue(baseName + " EASYBULB OFF " + getSelectedEasybulbGroupCapitalised());
             }
         });
 
@@ -134,7 +134,7 @@ public class ControlPanelActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String baseName = getSelectedBase();
                 if (baseName != null)
-                    ZeusMainActivity.ROOT.child("bases").child(baseName).setValue(baseName + " EASYBULB WHITE " + getSelectedEasybulbGroupCapitalised());
+                    ZeusMainActivity.ROOT.child("bases").child(baseName).child("script").setValue(baseName + " EASYBULB WHITE " + getSelectedEasybulbGroupCapitalised());
             }
         });
 
@@ -148,7 +148,7 @@ public class ControlPanelActivity extends AppCompatActivity {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 String baseName = getSelectedBase();
                 if (baseName != null)
-                    ZeusMainActivity.ROOT.child("bases").child(baseName).setValue(baseName + " EASYBULB BRIGHTNESS " + getSelectedEasybulbGroupCapitalised() + " " + (progress - 128));
+                    ZeusMainActivity.ROOT.child("bases").child(baseName).child("script").setValue(baseName + " EASYBULB BRIGHTNESS " + getSelectedEasybulbGroupCapitalised() + " " + (progress - 128));
             }
         });
 
@@ -162,7 +162,7 @@ public class ControlPanelActivity extends AppCompatActivity {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 String baseName = getSelectedBase();
                 if (baseName != null)
-                    ZeusMainActivity.ROOT.child("bases").child(baseName).setValue(baseName + " EASYBULB COLOUR " + getSelectedEasybulbGroupCapitalised() + " " + (progress - 128));
+                    ZeusMainActivity.ROOT.child("bases").child(baseName).child("script").setValue(baseName + " EASYBULB COLOUR " + getSelectedEasybulbGroupCapitalised() + " " + (progress - 128));
             }
         });
 
