@@ -205,6 +205,14 @@ public class RoomActivity extends AppCompatActivity {
                 return "Battery";
             case 'i':
                 return "Infrared";
+            case 'w':
+                return "A2";
+            case 'x':
+                return "A3";
+            case 'y':
+                return "D2";
+            case 'z':
+                return "D3";
         }
         return null;
     }
