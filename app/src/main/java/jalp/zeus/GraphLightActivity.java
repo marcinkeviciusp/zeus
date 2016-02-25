@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 import android.widget.TableLayout;
+import android.widget.TextView;
 
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
@@ -18,11 +19,13 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 
 public class GraphLightActivity extends AppCompatActivity {
 
     Firebase mRef;
     protected String graphType = "light";
+    protected int seriesNumber = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,11 @@ public class GraphLightActivity extends AppCompatActivity {
         final ArrayList<String> spots = new ArrayList<>();
         final ArrayList<DataPoint>[] points = new ArrayList[10];
         final GraphView graph = (GraphView) findViewById(R.id.graphLight);
+        final TextView spotTitle = (TextView) findViewById(R.id.textViewSpot);
+        final TextView spotTitle2 = (TextView) findViewById(R.id.textViewSpot2);
+        final TextView spotTitle3 = (TextView) findViewById(R.id.textViewSpot3);
+        final TextView spotTitle4 = (TextView) findViewById(R.id.textViewSpot4);
+        final TextView spotTitle5 = (TextView) findViewById(R.id.textViewSpot5);
 
 //        plot(point.get(0), graph, "7ABD", "light");
 //        plot(point.get(1), graph, "8025", "light");
@@ -44,8 +52,11 @@ public class GraphLightActivity extends AppCompatActivity {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
                     spots.add(snapshot.getKey());
+
                 }
 
                 System.out.println("Spot size: " + spots.size());
@@ -63,6 +74,22 @@ public class GraphLightActivity extends AppCompatActivity {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             if (dataSnapshot.hasChild(graphType)) {
+                                if (finalI == 0) {
+                                    spotTitle.setText(spots.get(finalI));
+                                    spotTitle.setTextColor(Color.RED);
+                                } else if (finalI == 1) {
+                                    spotTitle2.setText(spots.get(finalI));
+                                    spotTitle2.setTextColor(Color.BLUE);
+                                } else if (finalI == 2) {
+                                    spotTitle3.setText(spots.get(finalI));
+                                    spotTitle3.setTextColor(Color.GREEN);
+                                } else if (finalI == 3) {
+                                    spotTitle4.setText(spots.get(finalI));
+                                    spotTitle4.setTextColor(Color.YELLOW);
+                                } else if (finalI == 4) {
+                                    spotTitle5.setText(spots.get(finalI));
+                                    spotTitle5.setTextColor(Color.BLACK);
+                                }
                                 points[finalI] = new ArrayList<>();
                                 plot(points[finalI], graph, spots.get(finalI));
                             }
@@ -101,6 +128,16 @@ public class GraphLightActivity extends AppCompatActivity {
                 LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(dbPoint);
                 graph.addSeries(series);
 
+                if (seriesNumber == 0) {
+                    series.setColor(Color.BLUE);
+                } else if (seriesNumber == 1) {
+                    series.setColor(Color.RED);
+                } else if (seriesNumber == 2) {
+                    series.setColor(Color.GREEN);
+                } else {
+                    series.setColor(Color.YELLOW);
+                }
+                seriesNumber++;
             }
 
             @Override
