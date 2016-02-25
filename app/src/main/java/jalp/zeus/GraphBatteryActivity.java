@@ -32,7 +32,7 @@ public class GraphBatteryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Notifier notificationService = new Notifier(this);
+        //Notifier notificationService = new Notifier(this);
         setContentView(R.layout.activity_graph_battery);
 
         final ArrayList<String> spots = new ArrayList<>();

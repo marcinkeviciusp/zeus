@@ -44,7 +44,7 @@ public class ControlPanelActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_control_panel);
-        Notifier notificationService = new Notifier(this);
+        //Notifier notificationService = new Notifier(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
