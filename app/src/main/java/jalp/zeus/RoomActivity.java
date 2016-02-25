@@ -96,7 +96,7 @@ public class RoomActivity extends AppCompatActivity {
                         TextView spotBattery = new TextView(context);
                         spotBattery.setText("Battery Level: " + data.getValue(String.class));
                         if(data.getValue(Double.class)>25) {
-                            spotBattery.setTextColor(Color.GREEN);
+                            spotBattery.setTextColor(Color.parseColor("#006400"));
                         }else if(data.getValue(Double.class)>10){
                             spotBattery.setTextColor(Color.YELLOW);
                         }else{
