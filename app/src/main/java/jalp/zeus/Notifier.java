@@ -20,6 +20,7 @@ public class Notifier {
     //Create NotificationManager  object
     private NotificationManager notifyMgr=null;
     Context context;
+    public static boolean created = false;
 
     public Notifier(Context con){
         this.context = con;
@@ -30,20 +31,11 @@ public class Notifier {
             @Override
             public void onChildAdded(final DataSnapshot snapshot, String previousChildKey) {
                 System.out.println(">>>>>>>>>>>>>>>>>>>>>>>" + snapshot.getKey());
+                NOTIFY_ME_ID++;
 
-                String message = "defaulMessage";
-                String title = "defaultTitle";
-                for (DataSnapshot data : snapshot.getChildren()) {
-                    if (data.getKey().equals("msg")) {
+                String message = snapshot.child("msg").getValue(String.class);
+                String title = snapshot.child("title").getValue(String.class);
 
-                        message = data.getValue(String.class);
-
-                    } else if (data.getKey().equals("title")) {
-                        //System.out.println(">>>>>>>>>>>>>>>>>>>>>>> Description: " + data.getValue(String.class));
-
-                        title = data.getValue(String.class);
-                    }
-                }
 
                 triggerNotification(title,message);
                 ZeusMainActivity.ROOT.child("notifications").child(snapshot.getKey()).setValue(null);
@@ -61,6 +53,8 @@ public class Notifier {
             public void onCancelled(FirebaseError err) {}
 
         });
+
+        created = true;
     }
 
     public void triggerNotification(String title, String text) {
@@ -72,7 +66,7 @@ public class Notifier {
 
         // mId allows you to update the notification later on.
         notifyMgr.notify(NOTIFY_ME_ID, mBuilder.build());
-        NOTIFY_ME_ID++;
+
     }
 
 }
