@@ -21,10 +21,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainMenuActivity"
-            android:label="@string/title_activity_main_menu"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".DashBoardActivity"
             android:label="@string/title_activity_dash_board"
             android:theme="@style/AppTheme.NoActionBar" />
