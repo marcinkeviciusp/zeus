@@ -29,6 +29,8 @@ public class RoomActivity extends AppCompatActivity {
         setContentView(R.layout.activity_room);
         //Notifier notificationService = new Notifier(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        TextView textView = (TextView) findViewById(R.id.RoomName);
+        textView.setText(DashBoardActivity.room);
         setSupportActionBar(toolbar);
 
         final Context context = this;
