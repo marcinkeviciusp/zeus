@@ -13,6 +13,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -179,6 +182,19 @@ public class DashBoardActivity extends AppCompatActivity {
         // side menu end
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_test_main, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(drawerLayout.isDrawerOpen(Gravity.LEFT))
+            drawerLayout.closeDrawer(Gravity.LEFT);
+        else
+            drawerLayout.openDrawer(Gravity.LEFT);
+        return true;
+    }
 
 }
