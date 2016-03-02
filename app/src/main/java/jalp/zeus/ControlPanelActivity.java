@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.FirebaseError;
@@ -34,6 +35,10 @@ public class ControlPanelActivity extends AppCompatActivity {
     Button buttonEasybulbWhite;
     RadioGroup radioGroupEasybulbGroup;
 
+    Button tooltipButton;
+    TextView tooltipText;
+    boolean toolTipOut = false;
+
     String[] zeusSections = new String[]{
             "Dashboard",
             "Control Panel",
@@ -50,10 +55,19 @@ public class ControlPanelActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        tooltipText = (TextView) findViewById(R.id.text_contro_panel_tooltip_info);
+        tooltipButton = (Button) findViewById(R.id.button_tooltip_base);
         radioGroupTemperatures = (RadioGroup) findViewById(R.id.radioGroupTemperatures);
         radioGroupBases = (RadioGroup) findViewById(R.id.radioGroupBases);
         buttonBoilOrStop = (Button) findViewById(R.id.buttonBoilStopKettle);
         final boolean kettleBoiling[] = {false};
+
+        tooltipButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                tooltipText.setVisibility(toolTipOut ? View.GONE : View.VISIBLE);
+                toolTipOut = !toolTipOut;
+            }
+        });
 
         ZeusMainActivity.ROOT.child("bases").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -174,17 +188,7 @@ public class ControlPanelActivity extends AppCompatActivity {
 
         drawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch ((int) id) {
-                    case 0:
-                        startActivity(new Intent(ControlPanelActivity.this, DashBoardActivity.class));
-                        break;
-                    case 1:
-                        //startActivity(new Intent(ControlPanelActivity.this, ControlPanelActivity.class));
-                        break;
-                    case 2:
-                        startActivity(new Intent(ControlPanelActivity.this, DataTrendsActivity.class));
-                        break;
-                }
+                ZeusMainActivity.executeMenu(id, ControlPanelActivity.this);
             }
         });
     }
