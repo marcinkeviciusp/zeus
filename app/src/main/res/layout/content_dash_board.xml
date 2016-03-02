@@ -29,11 +29,12 @@
                 android:paddingTop="@dimen/activity_vertical_margin"
                 android:id="@+id/mainScreen">
 
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="Rooms" android:textSize="30dp"/>
+
+            </RelativeLayout>
 
         </ScrollView>
 

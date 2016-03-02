@@ -45,18 +45,18 @@ public class RoomActivity extends AppCompatActivity {
         final RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         params.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
         params.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
-        TextView title = new TextView(context);
+        /*TextView title = new TextView(context);
         title.setText("Rooms");
         title.setTextSize(30);
-        screen.addView(title);
+        screen.addView(title);*/
 
-        final ScrollView screen = (ScrollView) this.findViewById(R.id.scrollView);
+       // final ScrollView screen = (ScrollView) this.findViewById(R.id.scrollView);
         final LinearLayout lL = new LinearLayout(context);
         lL.setOrientation(LinearLayout.VERTICAL);
   //      lL.setMinimumHeight(screen.getHeight());
         lL.setMinimumWidth(screen.getWidth());
         lL.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT) );
-        lL.setPadding(0,200,0,0);
+        //lL.setPadding(0,200,0,0);
 
         screen.addView(lL, params);
         System.out.println("Liam's stuff>>>>> In Room Activity " + DashBoardActivity.room);
