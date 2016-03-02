@@ -51,7 +51,11 @@
         <activity
             android:name=".RoomActivity"
             android:label="@string/title_activity_room"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SpotActivity"
+            android:label="@string/title_activity_spot"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

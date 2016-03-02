@@ -62,6 +62,15 @@ public class ControlPanelActivity extends AppCompatActivity {
         buttonBoilOrStop = (Button) findViewById(R.id.buttonBoilStopKettle);
         final boolean kettleBoiling[] = {false};
 
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_control_panel);
+        drawerList = (ListView) findViewById(R.id.left_drawer_control_panel);
+        drawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, zeusSections));
+        drawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ZeusMainActivity.executeMenu(id, ControlPanelActivity.this);
+            }
+        });
+
         for(View v : radioGroupTemperatures.getTouchables()){
             v.setEnabled(false);
         }
@@ -216,16 +225,6 @@ public class ControlPanelActivity extends AppCompatActivity {
                 String baseName = getSelectedBase();
                 if (baseName != null)
                     ZeusMainActivity.ROOT.child("bases").child(baseName).child("script").setValue(baseName + " EASYBULB COLOUR " + getSelectedEasybulbGroupCapitalised() + " " + (progress - 128));
-            }
-        });
-
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_control_panel);
-        drawerList = (ListView) findViewById(R.id.left_drawer_control_panel);
-        drawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, zeusSections));
-
-        drawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ZeusMainActivity.executeMenu(id, ControlPanelActivity.this);
             }
         });
     }

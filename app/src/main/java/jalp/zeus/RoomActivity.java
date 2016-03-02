@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
@@ -25,6 +26,8 @@ import com.firebase.client.Query;
 
 public class RoomActivity extends AppCompatActivity {
 
+
+    public static String spot;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +50,7 @@ public class RoomActivity extends AppCompatActivity {
         title.setTextSize(30);
         screen.addView(title);
 
+        final ScrollView screen = (ScrollView) this.findViewById(R.id.scrollView);
         final LinearLayout lL = new LinearLayout(context);
         lL.setOrientation(LinearLayout.VERTICAL);
   //      lL.setMinimumHeight(screen.getHeight());
@@ -62,7 +66,8 @@ public class RoomActivity extends AppCompatActivity {
 
         queryRef.addChildEventListener(new ChildEventListener(){
 
-            public void onChildAdded(DataSnapshot snapshot, String previousChildKey) {
+            public void onChildAdded(final DataSnapshot snapshot, String previousChildKey) {
+            
 
 
                 System.out.println("Liam's stuff>>>>>" + snapshot.getKey());
@@ -73,6 +78,15 @@ public class RoomActivity extends AppCompatActivity {
                 card.setMinimumWidth(screen.getWidth());
                 card.setMinimumHeight(150);
                 card.setClickable(false);
+                card.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>");
+                        spot = snapshot.getKey();
+                        //startActivity(new Intent(RoomActivity.this, SpotActivity.class));
+                        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>> spot = " + spot);
+                    }
+                });
                 card.setId(nameToID(snapshot.getKey()));
                 lL.addView(card);
 
@@ -80,6 +94,7 @@ public class RoomActivity extends AppCompatActivity {
 
                 //RelativeLayout container = new RelativeLayout(context);
                 TableLayout container = new TableLayout(context);
+                container.setId(nameToID("container"));
                 card.addView(container);
 
                 for (DataSnapshot data : snapshot.getChildren()) {
@@ -87,7 +102,7 @@ public class RoomActivity extends AppCompatActivity {
                         TextView spotName = new TextView(context);
                         spotName.setText(data.getValue(String.class));
                         spotName.setTextSize(30);
-
+                        spotName.setId(nameToID(data.getKey()));
                         container.addView(spotName);
 
                     }else if(data.getKey().equals("alive")){
@@ -98,7 +113,7 @@ public class RoomActivity extends AppCompatActivity {
                             spotStatus.setText("Off");
                         }
                         spotStatus.setTextSize(15);
-
+                        spotStatus.setId(nameToID(data.getKey()));
                         container.addView(spotStatus);
 
                         View divider = new View(context);
@@ -120,7 +135,7 @@ public class RoomActivity extends AppCompatActivity {
                             spotBattery.setTextColor(Color.RED);
                         }
                         spotBattery.setTextSize(15);
-
+                        spotBattery.setId(nameToID(data.getKey()));
                         container.addView(spotBattery);
 
                         View divider = new View(context);
@@ -135,7 +150,7 @@ public class RoomActivity extends AppCompatActivity {
                         TextView spotType = new TextView(context);
                         spotType.setText(typeReader(data.getValue(String.class)));
                         spotType.setTextSize(15);
-
+                        spotType.setId(nameToID(data.getKey()));
                         container.addView(spotType);
 
                         View divider = new View(context);
@@ -156,20 +171,42 @@ public class RoomActivity extends AppCompatActivity {
             }
 
             public void onChildChanged(DataSnapshot snapshot, String someString) {
-                boolean roomChanged = false;
                 int id = nameToID(snapshot.getKey());
                 CardView card = (CardView)lL.findViewById(id);
 
                 for (DataSnapshot data : snapshot.getChildren()) {
                     if (data.getKey().equals("room")) {
                         if(!data.getValue(String.class).equals(DashBoardActivity.room)){
-                            roomChanged = true;
+                            lL.removeView(card);
                         }
+                    }else if (data.getKey().equals("name")){
+                        TableLayout container = (TableLayout)card.findViewById(nameToID("container"));
+                        TextView text = (TextView)container.findViewById(nameToID(data.getKey()));
+                        text.setText(data.getValue(String.class));
+                    }else if (data.getKey().equals("alive")){
+                        TableLayout container = (TableLayout)card.findViewById(nameToID("container"));
+                        TextView text = (TextView)container.findViewById(nameToID(data.getKey()));
+                        if(data.getValue(String.class).equals("true")) {
+                            text.setText("Alive");
+                        }else if(data.getValue(String.class).equals("false")){
+                            text.setText("Off");
+                        }
+                    }else if (data.getKey().equals("battery")){
+                        TableLayout container = (TableLayout)card.findViewById(nameToID("container"));
+                        TextView text = (TextView)container.findViewById(nameToID(data.getKey()));
+                        text.setText("Battery Level: " + data.getValue(String.class));
+                        if(data.getValue(Double.class)>25) {
+                            text.setTextColor(Color.parseColor("#006400"));
+                        }else if(data.getValue(Double.class)>10){
+                            text.setTextColor(Color.YELLOW);
+                        }else{
+                            text.setTextColor(Color.RED);
+                        }
+                    }else if (data.getKey().equals("liveData")){
+                        TableLayout container = (TableLayout)card.findViewById(nameToID("container"));
+                        TextView text = (TextView)container.findViewById(nameToID(data.getKey()));
+                        text.setText(typeReader(data.getValue(String.class)));
                     }
-                }
-
-                if(roomChanged){
-                    lL.removeView(card);
                 }
             }
 
@@ -236,9 +273,15 @@ public class RoomActivity extends AppCompatActivity {
 
     private static int nameToID(String name){
         String idString = "";
-
-        for(int i=0;i<name.length();i++){
-            idString += (int)name.charAt(i);
+        String str = name.toUpperCase();
+        if(name.length() > 4){
+            for(int i = 0; i<4; i++){
+                idString += (int) str.charAt(i);
+            }
+        }else {
+            for (int i = 0; i < name.length(); i++) {
+                idString += (int) str.charAt(i);
+            }
         }
 
         return Integer.parseInt(idString,10);
