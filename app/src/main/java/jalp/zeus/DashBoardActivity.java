@@ -166,17 +166,7 @@ public class DashBoardActivity extends AppCompatActivity {
 
         drawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch ((int) id) {
-                    case 0:
-                        //startActivity(new Intent(DashBoardActivity.this, DashBoardActivity.class));
-                        break;
-                    case 1:
-                        startActivity(new Intent(DashBoardActivity.this, ControlPanelActivity.class));
-                        break;
-                    case 2:
-                        startActivity(new Intent(DashBoardActivity.this, DataTrendsActivity.class));
-                        break;
-                }
+                ZeusMainActivity.executeMenu(id, DashBoardActivity.this);
             }
         });
         // side menu end

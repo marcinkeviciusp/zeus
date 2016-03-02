@@ -32,6 +32,40 @@ public class ZeusMainActivity extends AppCompatActivity
     TextView testUserFeedback;
     public static Firebase ROOT = null;
 
+    static Intent dashBoardActivity = null;
+    static Intent controlPanelActivity = null;
+    static Intent dataTrendsActivity = null;
+
+    public static void executeMenu(long selection, AppCompatActivity parent)
+    {
+        switch ((int) selection) {
+            case 0:
+                if(!(parent instanceof DashBoardActivity))
+                {
+                    if(dashBoardActivity == null)
+                        dashBoardActivity = new Intent(parent, DashBoardActivity.class);
+                    parent.startActivity(dashBoardActivity);
+                }
+                break;
+            case 1:
+                if(!(parent instanceof ControlPanelActivity))
+                {
+                    if(controlPanelActivity == null)
+                        controlPanelActivity = new Intent(parent, ControlPanelActivity.class);
+                    parent.startActivity(controlPanelActivity);
+                }
+                break;
+            case 2:
+                if(!(parent instanceof DataTrendsActivity))
+                {
+                    if(dataTrendsActivity == null)
+                        dataTrendsActivity = new Intent(parent, DataTrendsActivity.class);
+                    parent.startActivity(dataTrendsActivity);
+                }
+                break;
+        }
+    }
+
     @Override
     protected void onStart()
     {

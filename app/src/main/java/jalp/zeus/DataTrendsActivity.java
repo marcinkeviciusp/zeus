@@ -72,17 +72,7 @@ public class DataTrendsActivity extends AppCompatActivity {
 
         drawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch ((int) id) {
-                    case 0:
-                        startActivity(new Intent(DataTrendsActivity.this, DashBoardActivity.class));
-                        break;
-                    case 1:
-                        startActivity(new Intent(DataTrendsActivity.this, ControlPanelActivity.class));
-                        break;
-                    case 2:
-                        //startActivity(new Intent(DataTrendsActivity.this, DataTrendsActivity.class));
-                        break;
-                }
+                ZeusMainActivity.executeMenu(id, DataTrendsActivity.this);
             }
         });
     }
