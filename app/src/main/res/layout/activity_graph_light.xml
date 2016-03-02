@@ -18,47 +18,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Light"
-            android:elegantTextHeight="false"
+            android:elegantTextHeight="true"
             android:textSize="40sp"
             android:gravity="center" />
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:id="@+id/textViewSpot" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:id="@+id/textViewSpot2" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:id="@+id/textViewSpot3" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:id="@+id/textViewSpot4" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:id="@+id/textViewSpot5" />
-        </LinearLayout>
 
     </android.support.design.widget.AppBarLayout>
 
@@ -70,12 +32,11 @@
         android:layout_height="wrap_content" />
 
 
-    <com.jjoe64.graphview.GraphView
+    <com.github.mikephil.charting.charts.LineChart
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/graphLight"
-        android:layout_marginTop="50dp"
-        android:orientation="vertical" />
+        android:layout_marginTop="50dp" />
 
 
 </android.support.design.widget.CoordinatorLayout>

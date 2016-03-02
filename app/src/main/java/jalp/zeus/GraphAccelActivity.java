@@ -32,6 +32,7 @@ public class GraphAccelActivity extends AppCompatActivity {
     protected String graphType = "accel";
     protected int seriesNumber = 0;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
