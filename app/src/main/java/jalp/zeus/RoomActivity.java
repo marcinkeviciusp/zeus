@@ -1,5 +1,6 @@
 package jalp.zeus;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -10,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TableLayout;
@@ -36,11 +38,23 @@ public class RoomActivity extends AppCompatActivity {
         final Context context = this;
 
         final RelativeLayout screen = (RelativeLayout) this.findViewById(R.id.mainScreen);
+
+        final RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        params.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
+        params.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
+        TextView title = new TextView(context);
+        title.setText("Rooms");
+        title.setTextSize(30);
+        screen.addView(title);
+
         final LinearLayout lL = new LinearLayout(context);
         lL.setOrientation(LinearLayout.VERTICAL);
-        lL.setMinimumHeight(screen.getHeight());
+  //      lL.setMinimumHeight(screen.getHeight());
         lL.setMinimumWidth(screen.getWidth());
-        screen.addView(lL);
+        lL.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT) );
+        lL.setPadding(0,200,0,0);
+
+        screen.addView(lL, params);
         System.out.println("Liam's stuff>>>>> In Room Activity " + DashBoardActivity.room);
 
         Firebase ref = ZeusMainActivity.ROOT.child("spots");
@@ -49,6 +63,7 @@ public class RoomActivity extends AppCompatActivity {
         queryRef.addChildEventListener(new ChildEventListener(){
 
             public void onChildAdded(DataSnapshot snapshot, String previousChildKey) {
+
 
                 System.out.println("Liam's stuff>>>>>" + snapshot.getKey());
                 CardView card = new CardView(context);
