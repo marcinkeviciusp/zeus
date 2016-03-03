@@ -55,7 +55,7 @@ public class RoomActivity extends AppCompatActivity {
         lL.setOrientation(LinearLayout.VERTICAL);
   //      lL.setMinimumHeight(screen.getHeight());
         lL.setMinimumWidth(screen.getWidth());
-        lL.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT) );
+        lL.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         //lL.setPadding(0,200,0,0);
 
         screen.addView(lL, params);
@@ -83,7 +83,7 @@ public class RoomActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>");
                         spot = snapshot.getKey();
-                        //startActivity(new Intent(RoomActivity.this, SpotActivity.class));
+                        startActivity(new Intent(RoomActivity.this, SpotActivity.class));
                         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>> spot = " + spot);
                     }
                 });

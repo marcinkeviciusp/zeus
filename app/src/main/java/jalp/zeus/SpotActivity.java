@@ -40,43 +40,45 @@ public class SpotActivity extends AppCompatActivity {
                     if(dataSnapshot.getValue(boolean.class))
                         text.setText("Alive");
                     else
-                        text.setText("Alive");
+                        text.setText("Off");
                 }else if(dataSnapshot.getKey().equals("compass")){
                     TextView text = (TextView) findViewById(R.id.compassText);
-                    text.setText(dataSnapshot.getValue(double.class).toString());
+                    text.setText("Compass: " + dataSnapshot.getValue(double.class).toString());
                 }else if(dataSnapshot.getKey().equals("accel")){
                     TextView text = (TextView) findViewById(R.id.accelText);
-                    text.setText(dataSnapshot.getValue(double.class).toString());
+                    text.setText("Acceleration: " + dataSnapshot.getValue(double.class).toString());
                 }else if(dataSnapshot.getKey().equals("btn_l")){
                     TextView text = (TextView) findViewById(R.id.lbtnText);
                     if(dataSnapshot.getValue(boolean.class))
-                        text.setText("Pressed");
+                        text.setText("Left Pressed");
                     else
-                        text.setText("Not Press");
+                        text.setText("Left Not Pressed");
                 }else if(dataSnapshot.getKey().equals("btn_r")){
                     TextView text = (TextView) findViewById(R.id.rbtnText);
                     if(dataSnapshot.getValue(boolean.class))
-                        text.setText("Pressed");
+                        text.setText("Right Pressed");
                     else
-                        text.setText("Not Press");
+                        text.setText("Right Not Pressed");
                 }else if(dataSnapshot.getKey().equals("infrared")){
                     TextView text = (TextView) findViewById(R.id.infraredText);
                     if(dataSnapshot.getValue(boolean.class))
-                        text.setText("Active");
+                        text.setText("Infrared Active");
                     else
-                        text.setText("Not Active");
+                        text.setText("Infrared Not Active");
                 }else if(dataSnapshot.getKey().equals("light")){
                     TextView text = (TextView) findViewById(R.id.lightText);
-                    text.setText(dataSnapshot.getValue(double.class).toString());
+                    text.setText("Light: " + dataSnapshot.getValue(double.class).toString());
                 }else if(dataSnapshot.getKey().equals("sound")){
                     TextView text = (TextView) findViewById(R.id.soundText);
                     if(dataSnapshot.getValue(boolean.class))
-                        text.setText("Active");
+                        text.setText("Sound Active");
                     else
-                        text.setText("Not Active");
+                        text.setText("Sound Not Active");
                 }else if(dataSnapshot.getKey().equals("temp")){
                     TextView text = (TextView) findViewById(R.id.tempText);
-                    text.setText(dataSnapshot.getValue(double.class).toString());
+                    text.setText("Temperature: " + dataSnapshot.getValue(double.class).toString());
+                }else if(dataSnapshot.getKey().equals("liveData")){
+                    removeUnusedTypes(dataSnapshot.getValue(String.class));
                 }
             }
 
@@ -92,43 +94,45 @@ public class SpotActivity extends AppCompatActivity {
                     if(dataSnapshot.getValue(boolean.class))
                         text.setText("Alive");
                     else
-                        text.setText("Alive");
+                        text.setText("Off");
                 }else if(dataSnapshot.getKey().equals("compass")){
                     TextView text = (TextView) findViewById(R.id.compassText);
-                    text.setText(dataSnapshot.getValue(int.class).toString());
+                    text.setText("Compass: " + dataSnapshot.getValue(int.class).toString());
                 }else if(dataSnapshot.getKey().equals("accel")){
                     TextView text = (TextView) findViewById(R.id.accelText);
-                    text.setText(dataSnapshot.getValue(int.class).toString());
+                    text.setText("Acceleration: " + dataSnapshot.getValue(int.class).toString());
                 }else if(dataSnapshot.getKey().equals("btn_l")){
                     TextView text = (TextView) findViewById(R.id.lbtnText);
                     if(dataSnapshot.getValue(boolean.class))
-                        text.setText("Pressed");
+                        text.setText("Left Pressed");
                     else
-                        text.setText("Not Press");
+                        text.setText("Left Not Pressed");
                 }else if(dataSnapshot.getKey().equals("btn_r")){
                     TextView text = (TextView) findViewById(R.id.rbtnText);
                     if(dataSnapshot.getValue(boolean.class))
-                        text.setText("Pressed");
+                        text.setText("Left Pressed");
                     else
-                        text.setText("Not Press");
+                        text.setText("Left Not Pressed");
                 }else if(dataSnapshot.getKey().equals("infrared")){
                     TextView text = (TextView) findViewById(R.id.infraredText);
                     if(dataSnapshot.getValue(boolean.class))
-                        text.setText("Active");
+                        text.setText("Infrared Active");
                     else
-                        text.setText("Not Active");
+                        text.setText("Infrared Not Active");
                 }else if(dataSnapshot.getKey().equals("light")){
                     TextView text = (TextView) findViewById(R.id.lightText);
-                    text.setText(dataSnapshot.getValue(int.class).toString());
+                    text.setText("Light: " + dataSnapshot.getValue(int.class).toString());
                 }else if(dataSnapshot.getKey().equals("sound")){
                     TextView text = (TextView) findViewById(R.id.soundText);
                     if(dataSnapshot.getValue(boolean.class))
-                        text.setText("Active");
+                        text.setText("Sound Active");
                     else
-                        text.setText("Not Active");
+                        text.setText("Sound Not Active");
                 }else if(dataSnapshot.getKey().equals("temp")){
                     TextView text = (TextView) findViewById(R.id.tempText);
-                    text.setText(dataSnapshot.getValue(int.class).toString());
+                    text.setText("Temperature: " + dataSnapshot.getValue(int.class).toString());
+                }else if(dataSnapshot.getKey().equals("liveData")){
+                    removeUnusedTypes(dataSnapshot.getValue(String.class));
                 }
             }
 
@@ -149,4 +153,97 @@ public class SpotActivity extends AppCompatActivity {
         });
     }
 
+    private  void removeUnusedTypes(String dataString){
+        String allTypes = "ctlabrseiwxyz";
+        char[] allTypesArray = allTypes.toCharArray();
+        for(int i=0;i<dataString.length();i++){
+            for(int j=0;j<allTypesArray.length;j++) {
+                if(dataString.charAt(i) == allTypesArray[j]){
+                    addType(dataString.charAt(i));
+                    allTypesArray[j] = 'u';
+                }
+            }
+        }
+        for(int i=0;i<allTypesArray.length;i++){
+            removeType(allTypesArray[i]);
+        }
+    }
+
+    private void addType(char character){
+        if(character == 'c'){
+            TextView text = (TextView) findViewById(R.id.compassText);
+            text.setVisibility(View.VISIBLE);
+        }else if(character == 't'){
+            TextView text = (TextView) findViewById(R.id.tempText);
+            text.setVisibility(View.VISIBLE);
+        }else if(character == 'l'){
+            TextView text = (TextView) findViewById(R.id.lightText);
+            text.setVisibility(View.VISIBLE);
+        }else if(character == 'a'){
+            TextView text = (TextView) findViewById(R.id.accelText);
+            text.setVisibility(View.VISIBLE);
+        }else if(character == 'b'){
+            TextView text = (TextView) findViewById(R.id.lbtnText);
+            text.setVisibility(View.VISIBLE);
+        }else if(character == 'r'){
+            TextView text = (TextView) findViewById(R.id.rbtnText);
+            text.setVisibility(View.VISIBLE);
+        }else if(character == 's'){
+            TextView text = (TextView) findViewById(R.id.soundText);
+            text.setVisibility(View.VISIBLE);
+        }else if(character == 'i'){
+            TextView text = (TextView) findViewById(R.id.infraredText);
+            text.setVisibility(View.VISIBLE);
+        }else if(character == 'e'){
+            ProgressBar mProgress = (ProgressBar) findViewById(R.id.batteryProgress);
+            mProgress.setVisibility(View.VISIBLE);
+            TextView text = (TextView) findViewById(R.id.infraredText);
+            text.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void removeType(char character){
+        if(character == 'c'){
+            System.out.println("In Compass");
+            TextView text = (TextView) findViewById(R.id.compassText);
+            text.setVisibility(View.GONE);
+        }else if(character == 't'){
+            TextView text = (TextView) findViewById(R.id.tempText);
+            text.setVisibility(View.GONE);
+        }else if(character == 'l'){
+            TextView text = (TextView) findViewById(R.id.lightText);
+            text.setVisibility(View.GONE);
+        }else if(character == 'a'){
+            TextView text = (TextView) findViewById(R.id.accelText);
+            text.setVisibility(View.GONE);
+        }else if(character == 'b'){
+            TextView text = (TextView) findViewById(R.id.lbtnText);
+            text.setVisibility(View.GONE);
+        }else if(character == 'r'){
+            TextView text = (TextView) findViewById(R.id.rbtnText);
+            text.setVisibility(View.GONE);
+        }else if(character == 's'){
+            TextView text = (TextView) findViewById(R.id.soundText);
+            text.setVisibility(View.GONE);
+        }else if(character == 'i'){
+            TextView text = (TextView) findViewById(R.id.infraredText);
+            text.setVisibility(View.GONE);
+        }else if(character == 'e'){
+            ProgressBar mProgress = (ProgressBar) findViewById(R.id.batteryProgress);
+            mProgress.setVisibility(View.GONE);
+            TextView text = (TextView) findViewById(R.id.infraredText);
+            text.setVisibility(View.GONE);
+        }
+    }
+
+    private boolean typeUsed(char character){
+        String allTypes = "ctlabrseiwxyz";
+        boolean unused = true;
+        for(int i=0;i<allTypes.length();i++){
+            if(character == allTypes.charAt(i)){
+                return true;
+            }
+        }
+        return false;
+    }
 }
