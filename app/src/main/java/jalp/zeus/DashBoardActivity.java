@@ -47,11 +47,15 @@ public class DashBoardActivity extends AppCompatActivity {
         final Context context = this;
 
         final RelativeLayout screen = (RelativeLayout) this.findViewById(R.id.mainScreen);
+
         final LinearLayout lL = new LinearLayout(context);
         lL.setOrientation(LinearLayout.VERTICAL);
-        lL.setMinimumHeight(screen.getHeight());
-        lL.setMinimumWidth(screen.getWidth());
-        screen.addView(lL);
+
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+
+        layoutParams.setMargins(0,110,0,0);
+        screen.addView(lL, layoutParams);
 
         ZeusMainActivity.ROOT.child("rooms").addChildEventListener(new ChildEventListener() {
             @Override

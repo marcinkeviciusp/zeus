@@ -1,18 +1,27 @@
 package jalp.zeus;
 
+import android.app.Fragment;
+
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
+import android.widget.ListView;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.DataPoint;
@@ -20,65 +29,47 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.sql.Timestamp;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
 public class GraphTempActivity extends AppCompatActivity {
 
-    Firebase mRef;
+    protected Firebase readings = ZeusMainActivity.ROOT.child("readings");
+
     protected String graphType = "temp";
-    protected int seriesNumber = 0;
+    protected String graphTypeUpper = graphType.substring(0, 1).toUpperCase() + graphType.substring(1);
+    protected LineChart chart;
+
+    final ArrayList<ILineDataSet> dataSets = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph_temp);
+        chart = (LineChart) findViewById(R.id.graphTemp);
 
-        final ArrayList<String> spots = new ArrayList<>();
-        final ArrayList<DataPoint>[] points = new ArrayList[10];
-        final GraphView graph = (GraphView) findViewById(R.id.graphTemp);
-        final TextView spotTitle = (TextView) findViewById(R.id.textViewSpot);
-        final TextView spotTitle2 = (TextView) findViewById(R.id.textViewSpot2);
-        final TextView spotTitle3 = (TextView) findViewById(R.id.textViewSpot3);
-        final TextView spotTitle4 = (TextView) findViewById(R.id.textViewSpot4);
-        final TextView spotTitle5 = (TextView) findViewById(R.id.textViewSpot5);
+        settings(chart);
 
-        Notifier notificationService = new Notifier(this);
-        ZeusMainActivity.ROOT.child("readings").addListenerForSingleValueEvent(new ValueEventListener() {
+        readings.addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
+                //For each spot
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    spots.add(snapshot.getKey());
-                }
 
-                System.out.println("Spot size: " + spots.size());
+                    //Spot name (8025, 7ABD, etc.)
+                    String spotName = snapshot.getKey();
 
-                for (int i = 0; i < spots.size(); i++) {
-                    final int finalI = i;
-                    ZeusMainActivity.ROOT.child("readings").child(spots.get(i)).addListenerForSingleValueEvent(new ValueEventListener() {
+                    readings.child(spotName).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            if (dataSnapshot.hasChild(graphType)) {
-                                if (finalI == 0) {
-                                    spotTitle.setText(spots.get(finalI));
-                                    spotTitle.setTextColor(Color.RED);
-                                } else if (finalI == 1) {
-                                    spotTitle2.setText(spots.get(finalI));
-                                    spotTitle2.setTextColor(Color.BLUE);
-                                } else if (finalI == 2) {
-                                    spotTitle3.setText(spots.get(finalI));
-                                    spotTitle3.setTextColor(Color.GREEN);
-                                } else if (finalI == 3) {
-                                    spotTitle4.setText(spots.get(finalI));
-                                    spotTitle4.setTextColor(Color.YELLOW);
-                                } else if (finalI == 4) {
-                                    spotTitle5.setText(spots.get(finalI));
-                                    spotTitle5.setTextColor(Color.BLACK);
-                                }
-                                points[finalI] = new ArrayList<>();
-                                plot(points[finalI], graph, spots.get(finalI));
+                        public void onDataChange(DataSnapshot snapshot) {
+
+                            //Check if it has a child "light"
+                            if (snapshot.hasChild(graphType)) {
+                                plot(snapshot.getKey());//SpotName{8025, 7ABD, etc.)
                             }
                         }
 
@@ -87,8 +78,8 @@ public class GraphTempActivity extends AppCompatActivity {
 
                         }
                     });
-                }
 
+                }
             }
 
             @Override
@@ -96,40 +87,57 @@ public class GraphTempActivity extends AppCompatActivity {
 
             }
         });
-
-
     }
 
-    protected void plot(final ArrayList<DataPoint> points, final GraphView graph, String spotName) {
-        ZeusMainActivity.ROOT.child("readings").child(spotName).child(graphType).addListenerForSingleValueEvent(new ValueEventListener() {
+    //This method configure chart settings
+    public void settings(LineChart chart) {
 
+        //Interaction with the Chart : https://github.com/PhilJay/MPAndroidChart/wiki/Interaction-with-the-Chart
+        chart.setTouchEnabled(true);
+        chart.setDragEnabled(true);
+        chart.setScaleEnabled(true);
+        chart.setEnabled(true);
+        chart.animateXY(2000,2000);
+        chart.setDescription(graphTypeUpper + " Trend");
+
+        //The Axis : https://github.com/PhilJay/MPAndroidChart/wiki/The-Axis
+        XAxis xAxis = chart.getXAxis();
+        xAxis.setLabelsToSkip(3);
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setTextSize(10f);
+        xAxis.setTextColor(Color.RED);
+        xAxis.setDrawAxisLine(true);
+        xAxis.setDrawGridLines(false);
+    }
+
+    public void plot(final String spotName) {
+        final ArrayList<Entry> entries = new ArrayList<>();
+        final ArrayList<String> labels = new ArrayList<>();
+
+        readings.child(spotName).child(graphType).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot entry : dataSnapshot.getChildren()) {
-                    Timestamp stamp = new Timestamp(Long.parseLong(entry.getKey()));
+                int i = 0;
+                System.out.println("SPOTNAME: " + spotName);
+
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Timestamp stamp = new Timestamp(Long.parseLong(snapshot.getKey()));
                     Date date = stamp;
-                    points.add(new DataPoint(date, entry.getValue(Double.class)));
+                    SimpleDateFormat ft = new SimpleDateFormat("hh:mm:ss");
+
+                    float value = snapshot.getValue(Float.class);
+                    entries.add(new Entry(value, i));
+                    labels.add("" + ft.format(date));
+                    i++;
                 }
 
-                DataPoint[] dbPoint = points.toArray(new DataPoint[points.size()]);
-                LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(dbPoint);
-                graph.addSeries(series);
-                graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(GraphTempActivity.this, DateFormat.getTimeInstance()));
-                graph.getGridLabelRenderer().setNumHorizontalLabels(3); // only 4 because of the space
+                LineDataSet dataSet = new LineDataSet(entries, spotName);
+                dataSet.setColor(ColorTemplate.JOYFUL_COLORS[dataSets.size()]);
+                dataSets.add(dataSet);
 
-                if (seriesNumber == 0) {
-                    series.setColor(Color.BLUE);
-                } else if (seriesNumber == 1) {
-                    series.setColor(Color.RED);
-                } else if (seriesNumber == 2) {
-                    series.setColor(Color.GREEN);
-                } else {
-                    series.setColor(Color.YELLOW);
-                }
-                series.setDrawBackground(true);
-                series.setDrawDataPoints(true);
-
-                seriesNumber++;
+                LineData data = new LineData(labels, dataSets);
+                chart.setData(data);
+                chart.invalidate();
             }
 
             @Override
@@ -138,5 +146,4 @@ public class GraphTempActivity extends AppCompatActivity {
             }
         });
     }
-//    Notifier notificationService = new Notifier(this);
 }

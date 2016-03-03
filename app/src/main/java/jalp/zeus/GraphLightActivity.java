@@ -36,44 +36,40 @@ import java.util.Random;
 
 public class GraphLightActivity extends AppCompatActivity {
 
-    Firebase mRef;
+    protected Firebase readings = ZeusMainActivity.ROOT.child("readings");
+
     protected String graphType = "light";
-    protected int seriesNumber = 0;
-    Firebase readings = ZeusMainActivity.ROOT.child("readings");
-    LineChart chart;
-    final ArrayList<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
+    protected String graphTypeUpper = graphType.substring(0, 1).toUpperCase() + graphType.substring(1);
+    protected LineChart chart;
+
+    final ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph_light);
         chart = (LineChart) findViewById(R.id.graphLight);
 
-        final ArrayList<String> spots = new ArrayList<>();
         settings(chart);
 
         readings.addListenerForSingleValueEvent(new ValueEventListener() {
+
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 //For each spot
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    //Spot name = snapshot.getKey() -> 8025, 7ABD
-                    spots.add(snapshot.getKey());
 
-                }
-
-                System.out.println("Spot Size: " + spots.size());
-
-                for (int i = 0; i < spots.size(); i++) {
-                    final String spotName = spots.get(i);
-                    final int finalI = i;
+                    //Spot name (8025, 7ABD, etc.)
+                    String spotName = snapshot.getKey();
 
                     readings.child(spotName).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot snapshot) {
-                            if (snapshot.hasChild("light")) {
-                                final String spotName = snapshot.getKey();
-                                plot(spotName);
+
+                            //Check if it has a child "light"
+                            if (snapshot.hasChild(graphType)) {
+                                plot(snapshot.getKey());//SpotName{8025, 7ABD, etc.)
                             }
                         }
 
@@ -82,6 +78,7 @@ public class GraphLightActivity extends AppCompatActivity {
 
                         }
                     });
+
                 }
             }
 
@@ -99,9 +96,11 @@ public class GraphLightActivity extends AppCompatActivity {
         chart.setTouchEnabled(true);
         chart.setDragEnabled(true);
         chart.setScaleEnabled(true);
+        chart.setEnabled(true);
+        chart.animateXY(2000,2000);
+        chart.setDescription(graphTypeUpper + " Trend");
 
         //The Axis : https://github.com/PhilJay/MPAndroidChart/wiki/The-Axis
-        chart.setEnabled(true);
         XAxis xAxis = chart.getXAxis();
         xAxis.setLabelsToSkip(3);
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -112,17 +111,16 @@ public class GraphLightActivity extends AppCompatActivity {
     }
 
     public void plot(final String spotName) {
-        final ArrayList<Entry> entries = new ArrayList<Entry>();
-        final ArrayList<String> labels = new ArrayList<String>();
+        final ArrayList<Entry> entries = new ArrayList<>();
+        final ArrayList<String> labels = new ArrayList<>();
 
-        readings.child(spotName).child("light").addListenerForSingleValueEvent(new ValueEventListener() {
+        readings.child(spotName).child(graphType).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 int i = 0;
                 System.out.println("SPOTNAME: " + spotName);
+
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-//                                            System.out.println("Timestamp " + snapshot.getKey());
-//                                            System.out.println("Value " + snapshot.getValue());
                     Timestamp stamp = new Timestamp(Long.parseLong(snapshot.getKey()));
                     Date date = stamp;
                     SimpleDateFormat ft = new SimpleDateFormat("hh:mm:ss");
@@ -132,7 +130,6 @@ public class GraphLightActivity extends AppCompatActivity {
                     labels.add("" + ft.format(date));
                     i++;
                 }
-
 
                 LineDataSet dataSet = new LineDataSet(entries, spotName);
                 dataSet.setColor(ColorTemplate.JOYFUL_COLORS[dataSets.size()]);

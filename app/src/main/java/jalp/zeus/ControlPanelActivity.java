@@ -66,6 +66,9 @@ public class ControlPanelActivity extends AppCompatActivity {
             }
         });
 
+        for(View v : radioGroupTemperatures.getTouchables()){
+            v.setEnabled(false);
+        }
         tooltipButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 tooltipText.setVisibility(toolTipOut ? View.GONE : View.VISIBLE);
@@ -130,9 +133,43 @@ public class ControlPanelActivity extends AppCompatActivity {
         buttonEasybulbOff = (Button) findViewById(R.id.buttonEasybulbOff);
         buttonEasybulbWhite = (Button) findViewById(R.id.buttonEasybulbWhite);
         radioGroupEasybulbGroup = (RadioGroup) findViewById(R.id.radioGroupEasybulbGroup);
-
+        for(View v : radioGroupEasybulbGroup.getTouchables()){
+            System.out.println("######################### DISABLING RADIO BUTTON");
+            v.setEnabled(false);
+        }
         seekBarEasybulbColour.getProgressDrawable().setAlpha(0);
         seekBarEasybulbBrightness.getProgressDrawable().setAlpha(0);
+
+        radioGroupBases.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            public void onCheckedChanged(RadioGroup group, int checked) {
+
+
+                seekBarEasybulbBrightness.setEnabled(true);
+                seekBarEasybulbColour.setEnabled(true);
+
+
+
+                for(int i = 0; i < radioGroupEasybulbGroup.getChildCount(); i++){
+                    ((RadioButton)radioGroupEasybulbGroup.getChildAt(i)).setEnabled(true);
+                }
+
+                for(int i = 0; i < radioGroupTemperatures.getChildCount(); i++){
+                    ((RadioButton)radioGroupTemperatures.getChildAt(i)).setEnabled(true);
+                }
+
+                buttonBoilOrStop.setEnabled(true);
+                buttonEasybulbOff.setEnabled(true);
+                buttonEasybulbOn.setEnabled(true);
+                buttonEasybulbWhite.setEnabled(true);
+
+                buttonBoilOrStop.setBackgroundResource(android.R.drawable.btn_default);
+                buttonEasybulbOff.setBackgroundResource(android.R.drawable.btn_default);
+                buttonEasybulbOn.setBackgroundResource(android.R.drawable.btn_default);
+                buttonEasybulbWhite.setBackgroundResource(android.R.drawable.btn_default);
+
+            }
+
+        });
 
         buttonEasybulbOn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -206,4 +243,5 @@ public class ControlPanelActivity extends AppCompatActivity {
         RadioButton selectedBase = (RadioButton) findViewById(radioGroupEasybulbGroup.getCheckedRadioButtonId());
         return selectedBase.getText().toString().toUpperCase();
     }
+
 }
