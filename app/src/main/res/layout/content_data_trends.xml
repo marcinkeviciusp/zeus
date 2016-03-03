@@ -23,50 +23,54 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="fill_parent">
 
             <Button
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="120dp"
                 android:text="Light"
                 android:id="@+id/btnLight"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:layout_alignParentStart="true"
+                android:textSize="30dp" />
 
             <Button
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="120dp"
                 android:text="Temp"
                 android:id="@+id/btnTemp"
                 android:layout_below="@+id/btnLight"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignRight="@+id/btnLight"
-                android:layout_alignEnd="@+id/btnLight" />
+                android:layout_alignEnd="@+id/btnLight"
+                android:textSize="30dp" />
 
             <Button
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="120dp"
                 android:text="Accel"
                 android:id="@+id/btnAccel"
                 android:layout_below="@+id/btnTemp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignRight="@+id/btnTemp"
-                android:layout_alignEnd="@+id/btnTemp" />
+                android:layout_alignEnd="@+id/btnTemp"
+                android:textSize="30dp" />
 
             <Button
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="120dp"
                 android:text="Battery"
                 android:id="@+id/btnBattery"
                 android:layout_below="@+id/btnAccel"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignRight="@+id/btnAccel"
-                android:layout_alignEnd="@+id/btnAccel" />
+                android:layout_alignEnd="@+id/btnAccel"
+                android:textSize="30dp" />
 
             </RelativeLayout>
     </FrameLayout>
