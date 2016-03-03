@@ -123,6 +123,14 @@ public class ZeusMainActivity extends AppCompatActivity
                 final String email = textFieldEmail.getText().toString();
                 final String password = textFieldPassword.getText().toString();
 
+                int atIndex = email.indexOf("@");
+                int dotIndex = email.lastIndexOf(".");
+                if(atIndex < 0 || dotIndex < 0 || atIndex > dotIndex || atIndex + 1 == dotIndex || email.length() - 1 == dotIndex || atIndex == 0)
+                {
+                    testUserFeedback.setText("The email entered is invalid");
+                    return;
+                }
+
                 if(email.length() == 0 || password.length() == 0)
                 {
                     testUserFeedback.setText("Please enter both email and password");
@@ -145,7 +153,6 @@ public class ZeusMainActivity extends AppCompatActivity
                                     buttonLogIn.setVisibility(View.VISIBLE);
                                     testUserFeedback.setText("Login Successful");
                                     ROOT = firebaseUserRef.child("data");
-
 
                                     firebaseUserRef.child("firstName").addListenerForSingleValueEvent(new ValueEventListener() {
                                         public void onCancelled(FirebaseError firebaseError) {}

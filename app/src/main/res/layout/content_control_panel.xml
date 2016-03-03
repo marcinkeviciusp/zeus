@@ -54,13 +54,13 @@
                             android:text="\?"
                             android:id="@+id/button_tooltip_base"
                             android:background="@drawable/circle"
-                            android:maxWidth="20dp"
-                            android:maxHeight="20dp"
-                            android:minHeight="20dp"
-                            android:minWidth="20dp"
+                            android:maxWidth="26dp"
+                            android:maxHeight="26dp"
+                            android:minHeight="26dp"
+                            android:minWidth="26dp"
                             android:layout_toRightOf="@+id/textViewBaseTitle"
                             android:layout_marginLeft="7dp"
-                            android:layout_marginTop="3dp" />
+                            android:textSize="20dp" />
 
                         <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
                             android:layout_width="wrap_content"
@@ -234,7 +234,7 @@
                     android:minWidth="420dp"
                     android:maxHeight="45dp"
                     android:paddingBottom="2dp"
-                    android:max="256"
+                    android:max="255"
                     android:clickable="false"/>
 
                 <ImageView
