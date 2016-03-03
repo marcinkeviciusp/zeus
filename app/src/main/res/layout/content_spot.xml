@@ -29,42 +29,52 @@
                 <TextView
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
+                    android:textSize="30dp"
                     android:id="@+id/batteryText" />
                 <TextView
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
+                    android:textSize="30dp"
                     android:id="@+id/aliveText" />
                 <TextView
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
+                    android:textSize="30dp"
                     android:id="@+id/accelText" />
                 <TextView
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
+                    android:textSize="30dp"
                     android:id="@+id/lbtnText" />
                 <TextView
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
+                    android:textSize="30dp"
                     android:id="@+id/rbtnText" />
                 <TextView
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
+                    android:textSize="30dp"
                     android:id="@+id/compassText" />
                 <TextView
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
+                    android:textSize="30dp"
                     android:id="@+id/infraredText" />
                 <TextView
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
+                    android:textSize="30dp"
                     android:id="@+id/lightText" />
                 <TextView
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
+                    android:textSize="30dp"
                     android:id="@+id/soundText" />
                 <TextView
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
+                    android:textSize="30dp"
                     android:id="@+id/tempText" />
             </TableLayout>
         </ScrollView>
