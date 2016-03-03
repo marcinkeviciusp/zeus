@@ -27,18 +27,19 @@
 
             <Button
                 android:layout_width="wrap_content"
-                android:layout_height="120dp"
+                android:layout_height="100dp"
                 android:text="Light"
                 android:id="@+id/btnLight"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:textSize="30dp" />
+                android:textSize="30dp"
+                android:layout_marginTop="60dp" />
 
             <Button
                 android:layout_width="wrap_content"
-                android:layout_height="120dp"
+                android:layout_height="100dp"
                 android:text="Temp"
                 android:id="@+id/btnTemp"
                 android:layout_below="@+id/btnLight"
@@ -50,7 +51,7 @@
 
             <Button
                 android:layout_width="wrap_content"
-                android:layout_height="120dp"
+                android:layout_height="100dp"
                 android:text="Accel"
                 android:id="@+id/btnAccel"
                 android:layout_below="@+id/btnTemp"
@@ -62,7 +63,7 @@
 
             <Button
                 android:layout_width="wrap_content"
-                android:layout_height="120dp"
+                android:layout_height="100dp"
                 android:text="Battery"
                 android:id="@+id/btnBattery"
                 android:layout_below="@+id/btnAccel"
@@ -71,6 +72,26 @@
                 android:layout_alignRight="@+id/btnAccel"
                 android:layout_alignEnd="@+id/btnAccel"
                 android:textSize="30dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Click on any buttons below will show you a graph of your data trend of all your sensors."
+                    android:id="@+id/textView"
+                    android:layout_below="@+id/textView2"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="What are the buttons for?"
+                    android:id="@+id/textView2"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
 
             </RelativeLayout>
     </FrameLayout>
