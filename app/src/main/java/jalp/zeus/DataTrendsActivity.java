@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class DataTrendsActivity extends AppCompatActivity {
 
@@ -23,22 +24,17 @@ public class DataTrendsActivity extends AppCompatActivity {
     Button mBtnAccel;
     Button mBtnBattery;
 
-    String[] zeusSections = new String[]{
-            "Dashboard",
-            "Control Panel",
-            "Data Trends"
-    };
     DrawerLayout drawerLayout;
     ListView drawerList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //Notifier notificationService = new Notifier(this);
         setContentView(R.layout.activity_data_trends);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        ((TextView) findViewById(R.id.text_view_data_trends_username)).setText(ZeusMainActivity.username);
         mBtnLight = (Button) findViewById(R.id.btnLight);
         mBtnTemp = (Button) findViewById(R.id.btnTemp);
         mBtnAccel = (Button) findViewById(R.id.btnAccel);
@@ -68,7 +64,7 @@ public class DataTrendsActivity extends AppCompatActivity {
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_data_trends);
         drawerList = (ListView) findViewById(R.id.left_drawer_data_trends);
-        drawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, zeusSections));
+        drawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, ZeusMainActivity.zeusMenuSections));
 
         drawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

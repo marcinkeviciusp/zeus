@@ -38,12 +38,6 @@ public class ControlPanelActivity extends AppCompatActivity {
     Button tooltipButton;
     TextView tooltipText;
     boolean toolTipOut = false;
-
-    String[] zeusSections = new String[]{
-            "Dashboard",
-            "Control Panel",
-            "Data Trends"
-    };
     DrawerLayout drawerLayout;
     ListView drawerList;
 
@@ -55,6 +49,7 @@ public class ControlPanelActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        ((TextView) findViewById(R.id.text_view_control_panel_username)).setText(ZeusMainActivity.username);
         tooltipText = (TextView) findViewById(R.id.text_contro_panel_tooltip_info);
         tooltipButton = (Button) findViewById(R.id.button_tooltip_base);
         radioGroupTemperatures = (RadioGroup) findViewById(R.id.radioGroupTemperatures);
@@ -64,7 +59,7 @@ public class ControlPanelActivity extends AppCompatActivity {
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_control_panel);
         drawerList = (ListView) findViewById(R.id.left_drawer_control_panel);
-        drawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, zeusSections));
+        drawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, ZeusMainActivity.zeusMenuSections));
         drawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ZeusMainActivity.executeMenu(id, ControlPanelActivity.this);
@@ -201,12 +196,8 @@ public class ControlPanelActivity extends AppCompatActivity {
         });
 
         seekBarEasybulbBrightness.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            public void onStopTrackingTouch(SeekBar seekBar) {
-            }
-
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
-
+            public void onStopTrackingTouch(SeekBar seekBar) {}
+            public void onStartTrackingTouch(SeekBar seekBar) {}
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 String baseName = getSelectedBase();
                 if (baseName != null)
@@ -215,12 +206,8 @@ public class ControlPanelActivity extends AppCompatActivity {
         });
 
         seekBarEasybulbColour.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            public void onStopTrackingTouch(SeekBar seekBar) {
-            }
-
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
-
+            public void onStopTrackingTouch(SeekBar seekBar) {}
+            public void onStartTrackingTouch(SeekBar seekBar) {}
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 String baseName = getSelectedBase();
                 if (baseName != null)
