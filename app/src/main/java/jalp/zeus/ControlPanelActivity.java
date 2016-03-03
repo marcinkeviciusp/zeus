@@ -147,30 +147,56 @@ public class ControlPanelActivity extends AppCompatActivity {
 
         radioGroupBases.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             public void onCheckedChanged(RadioGroup group, int checked) {
+                if(checked == R.id.radioButtonBaseNA){
+                    seekBarEasybulbBrightness.setEnabled(false);
+                    seekBarEasybulbColour.setEnabled(false);
 
 
-                seekBarEasybulbBrightness.setEnabled(true);
-                seekBarEasybulbColour.setEnabled(true);
+
+                    for(int i = 0; i < radioGroupEasybulbGroup.getChildCount(); i++){
+                        ((RadioButton)radioGroupEasybulbGroup.getChildAt(i)).setEnabled(false);
+                    }
+
+                    for(int i = 0; i < radioGroupTemperatures.getChildCount(); i++){
+                        ((RadioButton)radioGroupTemperatures.getChildAt(i)).setEnabled(false);
+                    }
+
+                    buttonBoilOrStop.setEnabled(false);
+                    buttonEasybulbOff.setEnabled(false);
+                    buttonEasybulbOn.setEnabled(false);
+                    buttonEasybulbWhite.setEnabled(false);
+
+                    buttonBoilOrStop.setBackgroundColor(getResources().getColor(R.color.cardview_light_background));
+                    buttonEasybulbOff.setBackgroundColor(getResources().getColor(R.color.cardview_light_background));
+                    buttonEasybulbOn.setBackgroundColor(getResources().getColor(R.color.cardview_light_background));
+                    buttonEasybulbWhite.setBackgroundColor(getResources().getColor(R.color.cardview_light_background));
+                }else{
+                    seekBarEasybulbBrightness.setEnabled(true);
+                    seekBarEasybulbColour.setEnabled(true);
 
 
 
-                for(int i = 0; i < radioGroupEasybulbGroup.getChildCount(); i++){
-                    ((RadioButton)radioGroupEasybulbGroup.getChildAt(i)).setEnabled(true);
+                    for(int i = 0; i < radioGroupEasybulbGroup.getChildCount(); i++){
+                        ((RadioButton)radioGroupEasybulbGroup.getChildAt(i)).setEnabled(true);
+                    }
+
+                    for(int i = 0; i < radioGroupTemperatures.getChildCount(); i++){
+                        ((RadioButton)radioGroupTemperatures.getChildAt(i)).setEnabled(true);
+                    }
+
+                    buttonBoilOrStop.setEnabled(true);
+                    buttonEasybulbOff.setEnabled(true);
+                    buttonEasybulbOn.setEnabled(true);
+                    buttonEasybulbWhite.setEnabled(true);
+
+                    buttonBoilOrStop.setBackgroundResource(android.R.drawable.btn_default);
+                    buttonEasybulbOff.setBackgroundResource(android.R.drawable.btn_default);
+                    buttonEasybulbOn.setBackgroundResource(android.R.drawable.btn_default);
+                    buttonEasybulbWhite.setBackgroundResource(android.R.drawable.btn_default);
                 }
 
-                for(int i = 0; i < radioGroupTemperatures.getChildCount(); i++){
-                    ((RadioButton)radioGroupTemperatures.getChildAt(i)).setEnabled(true);
-                }
 
-                buttonBoilOrStop.setEnabled(true);
-                buttonEasybulbOff.setEnabled(true);
-                buttonEasybulbOn.setEnabled(true);
-                buttonEasybulbWhite.setEnabled(true);
 
-                buttonBoilOrStop.setBackgroundResource(android.R.drawable.btn_default);
-                buttonEasybulbOff.setBackgroundResource(android.R.drawable.btn_default);
-                buttonEasybulbOn.setBackgroundResource(android.R.drawable.btn_default);
-                buttonEasybulbWhite.setBackgroundResource(android.R.drawable.btn_default);
 
             }
 

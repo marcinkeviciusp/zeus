@@ -174,7 +174,7 @@
                             android:layout_column="2"
                             android:layout_below="@+id/radioGroupTemperatures"
                             android:layout_centerHorizontal="true"
-                            android:clickable="false"
+                            android:enabled="false"
                             android:background="@android:color/background_light"/>
                     </RelativeLayout>
                 </LinearLayout>
@@ -235,7 +235,7 @@
                     android:maxHeight="45dp"
                     android:paddingBottom="2dp"
                     android:max="256"
-                    android:clickable="false"/>
+                    android:enabled="false"/>
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -265,7 +265,7 @@
                     android:minWidth="420dp"
                     android:layout_alignTop="@+id/imageViewBrightnessGradient"
                     android:paddingBottom="2dp"
-                    android:clickable="false"/>
+                    android:enabled="false"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -290,7 +290,7 @@
                     android:minWidth="118dp"
                     android:layout_alignTop="@+id/buttonEasybulbWhite"
                     android:layout_toRightOf="@+id/buttonEasybulbWhite"
-                    android:clickable="false"
+                    android:enabled="false"
                     android:background="@android:color/background_light"/>
 
                 <Button
@@ -303,7 +303,7 @@
                     android:minWidth="118dp"
                     android:layout_alignTop="@+id/buttonEasybulbWhite"
                     android:layout_toLeftOf="@+id/buttonEasybulbWhite"
-                    android:clickable="false"
+                    android:enabled="false"
                     android:background="@android:color/background_light"/>
 
                 <Button
@@ -316,7 +316,7 @@
                     android:minWidth="118dp"
                     android:layout_centerHorizontal="true"
                     android:layout_below="@+id/gridLayoutControlPanel"
-                    android:clickable="false"
+                    android:enabled="false"
                     android:background="@android:color/background_light"/>
 
                 <GridLayout
