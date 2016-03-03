@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.firebase.client.AuthData;
@@ -27,14 +28,26 @@ public class ZeusMainActivity extends AppCompatActivity
 
     ProgressBar spinnerLoggingIn;
     Button buttonLogIn;
+    Button buttonLogOut;
     EditText textFieldEmail;
     EditText textFieldPassword;
     TextView testUserFeedback;
     public static Firebase ROOT = null;
+    public static String username = "User: ";
+    public static String[] zeusMenuSections = new String[]{
+        "Dashboard",
+        "Control Panel",
+        "Data Trends",
+        "Log Out"
+    };
 
     static Intent dashBoardActivity = null;
     static Intent controlPanelActivity = null;
     static Intent dataTrendsActivity = null;
+    static ZeusMainActivity zeusMainActivity = null;
+
+    static RelativeLayout loginLayout;
+    static RelativeLayout logoutLayout;
 
     public static void executeMenu(long selection, AppCompatActivity parent)
     {
@@ -63,7 +76,19 @@ public class ZeusMainActivity extends AppCompatActivity
                     parent.startActivity(dataTrendsActivity);
                 }
                 break;
+            case 3:
+                logout();
         }
+    }
+
+    private static void logout()
+    {
+        username = "User: ";
+        ROOT = null;
+
+        Intent intent = new Intent(zeusMainActivity, ZeusMainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        zeusMainActivity.startActivity(intent);
     }
 
     @Override
@@ -71,18 +96,40 @@ public class ZeusMainActivity extends AppCompatActivity
     {
         super.onStart();
         setContentView(R.layout.activity_test_main);
-
         spinnerLoggingIn = (ProgressBar) findViewById(R.id.spinnerLoggingIn);
         buttonLogIn = (Button) findViewById(R.id.buttonLogIn);
+        buttonLogOut = (Button) findViewById(R.id.buttonLogOut);
         textFieldEmail = (EditText) findViewById(R.id.textFieldEmail);
         textFieldPassword = (EditText) findViewById(R.id.textFieldPassword);
         testUserFeedback = (TextView) findViewById(R.id.TextFieldOutput);
         spinnerLoggingIn.setVisibility(View.INVISIBLE);
+        zeusMainActivity = this;
+
+        loginLayout = (RelativeLayout) findViewById(R.id.login_layout_login);
+        logoutLayout = (RelativeLayout) findViewById(R.id.login_layout_logout);
+
+        if(!username.equals("User: "))
+        {
+            loginLayout.setVisibility(View.GONE);
+            logoutLayout.setVisibility(View.VISIBLE);
+        }
+
+        buttonLogOut.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) { logout(); }
+        });
 
         buttonLogIn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 final String email = textFieldEmail.getText().toString();
                 final String password = textFieldPassword.getText().toString();
+
+                int atIndex = email.indexOf("@");
+                int dotIndex = email.lastIndexOf(".");
+                if(atIndex < 0 || dotIndex < 0 || atIndex > dotIndex || atIndex + 1 == dotIndex || email.length() - 1 == dotIndex || atIndex == 0)
+                {
+                    testUserFeedback.setText("The email entered is invalid");
+                    return;
+                }
 
                 if(email.length() == 0 || password.length() == 0)
                 {
@@ -106,8 +153,26 @@ public class ZeusMainActivity extends AppCompatActivity
                                     buttonLogIn.setVisibility(View.VISIBLE);
                                     testUserFeedback.setText("Login Successful");
                                     ROOT = firebaseUserRef.child("data");
-                                    Intent intent = new Intent(ZeusMainActivity.this, DashBoardActivity.class);
-                                    startActivity(intent);
+
+                                    firebaseUserRef.child("firstName").addListenerForSingleValueEvent(new ValueEventListener() {
+                                        public void onCancelled(FirebaseError firebaseError) {}
+                                        public void onDataChange(DataSnapshot dataSnapshot) {
+                                            username += dataSnapshot.getValue(String.class);
+
+                                            firebaseUserRef.child("lastName").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                public void onCancelled(FirebaseError firebaseError) {
+                                                }
+
+                                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                                    username += " " + dataSnapshot.getValue(String.class);
+                                                    loginLayout.setVisibility(View.GONE);
+                                                    logoutLayout.setVisibility(View.VISIBLE);
+                                                    Intent intent = new Intent(ZeusMainActivity.this, DashBoardActivity.class);
+                                                    startActivity(intent);
+                                                }
+                                            });
+                                        }
+                                    });
                                 }
 
                                 public void onAuthenticationError(FirebaseError firebaseError) {
