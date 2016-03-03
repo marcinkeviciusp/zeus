@@ -61,8 +61,7 @@
             android:allowUndo="true"
             android:editable="true"
             android:layout_centerHorizontal="true"
-            android:layout_below="@+id/textPasswordID"
-            android:text="dev" />
+            android:layout_below="@+id/textPasswordID" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -79,8 +78,7 @@
             android:selectAllOnFocus="false"
             android:hint="example@gmail.com"
             android:password="false"
-            android:layout_below="@+id/textEmailID"
-            android:text="dev@dev.com" />
+            android:layout_below="@+id/textEmailID" />
 
         <Button
             android:layout_width="wrap_content"
