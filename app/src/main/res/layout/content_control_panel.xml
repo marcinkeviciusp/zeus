@@ -114,7 +114,8 @@
                             android:textAppearance="?android:attr/textAppearanceLarge"
                             android:text="Kettle"
                             android:id="@+id/textKettleTitle"
-                            android:layout_centerHorizontal="true" />
+                            android:layout_centerHorizontal="true"
+                            android:textColor="#bdbdbd" />
 
                         <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
                             android:layout_height="wrap_content"
@@ -193,7 +194,9 @@
                     android:id="@+id/textEasybulbHeader"
                     android:gravity="center"
                     android:layout_centerHorizontal="true"
-                    android:paddingBottom="2dp" />
+                    android:paddingBottom="2dp"
+                    android:clickable="false"
+                    android:textColor="#bdbdbd" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -206,15 +209,16 @@
                     android:layout_columnSpan="3"
                     android:gravity="center"
                     android:layout_centerHorizontal="true"
-                    android:layout_below="@+id/textEasybulbHeader" />
+                    android:layout_below="@+id/textEasybulbHeader"
+                    android:textColor="#bdbdbd" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/imageView"
+                    android:id="@+id/imageViewColourGradient"
                     android:layout_row="5"
                     android:layout_column="0"
-                    android:src="@drawable/easybulbgradient"
+                    android:src="@drawable/easybulbgray"
                     android:layout_columnSpan="3"
                     android:layout_below="@+id/textViewEasybulbColour"
                     android:layout_centerHorizontal="true"
@@ -227,7 +231,7 @@
                     android:indeterminate="false"
                     android:progress="0"
                     android:thumbTint="#ffffff"
-                    android:layout_alignTop="@+id/imageView"
+                    android:layout_alignTop="@+id/imageViewColourGradient"
                     android:layout_centerHorizontal="true"
                     android:minHeight="45dp"
                     android:maxWidth="420dp"
@@ -241,10 +245,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/imageViewBrightnessGradient"
-                    android:layout_row="8"
-                    android:layout_column="0"
-                    android:src="@drawable/easybulbbrightness"
-                    android:layout_columnSpan="3"
+                    android:src="@drawable/easybulbgray"
                     android:layout_below="@+id/textViewEasybulbBrightness"
                     android:layout_centerHorizontal="true" />
 
@@ -255,9 +256,6 @@
                     android:max="29"
                     android:indeterminate="false"
                     android:progress="29"
-                    android:layout_row="9"
-                    android:layout_column="0"
-                    android:layout_columnSpan="3"
                     android:layout_centerHorizontal="true"
                     android:maxHeight="45dp"
                     android:maxWidth="420dp"
@@ -265,7 +263,8 @@
                     android:minWidth="420dp"
                     android:layout_alignTop="@+id/imageViewBrightnessGradient"
                     android:paddingBottom="2dp"
-                    android:enabled="false"/>
+                    android:enabled="false"
+                    android:clickable="false"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -273,20 +272,16 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="Brightness"
                     android:id="@+id/textViewEasybulbBrightness"
-                    android:layout_row="7"
-                    android:layout_column="0"
-                    android:layout_columnSpan="3"
                     android:gravity="center"
                     android:layout_below="@+id/seekBarEasybulbColour"
-                    android:layout_centerHorizontal="true" />
+                    android:layout_centerHorizontal="true"
+                    android:textColor="#bdbdbd" />
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="ON"
                     android:id="@+id/buttonEasybulbOn"
-                    android:layout_row="11"
-                    android:layout_column="0"
                     android:minWidth="118dp"
                     android:layout_alignTop="@+id/buttonEasybulbWhite"
                     android:layout_toRightOf="@+id/buttonEasybulbWhite"
@@ -298,8 +293,6 @@
                     android:layout_height="wrap_content"
                     android:text="OFF"
                     android:id="@+id/buttonEasybulbOff"
-                    android:layout_row="11"
-                    android:layout_column="1"
                     android:minWidth="118dp"
                     android:layout_alignTop="@+id/buttonEasybulbWhite"
                     android:layout_toLeftOf="@+id/buttonEasybulbWhite"
@@ -337,7 +330,8 @@
                         android:layout_column="0"
                         android:gravity="center"
                         android:layout_below="@+id/textEasybulbHeader"
-                        android:layout_alignEnd="@+id/textEasybulbHeader" />
+                        android:layout_alignEnd="@+id/textEasybulbHeader"
+                        android:textColor="#bdbdbd" />
 
                     <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
                         android:layout_width="wrap_content"
