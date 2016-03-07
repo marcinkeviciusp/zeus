@@ -1,20 +1,22 @@
 package jalp.zeus;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
@@ -26,6 +28,8 @@ import com.firebase.client.Query;
 
 public class RoomActivity extends AppCompatActivity {
 
+    DrawerLayout drawerLayout;
+    ListView drawerList;
 
     public static String spot;
     @Override
@@ -225,6 +229,19 @@ public class RoomActivity extends AppCompatActivity {
         System.out.println("###############################");
         System.out.println("Selected room ID is: " + DashBoardActivity.room);
         System.out.println("###############################");
+
+        // side menu
+        ((TextView) findViewById(R.id.text_view_room_username)).setText(ZeusMainActivity.username);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_room);
+        drawerList = (ListView) findViewById(R.id.left_drawer_room);
+        drawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, ZeusMainActivity.zeusMenuSections));
+
+        drawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ZeusMainActivity.executeMenu(id, RoomActivity.this);
+            }
+        });
+        // side menu end
     }
 
     private static String typeReader(String dataString){
@@ -285,5 +302,20 @@ public class RoomActivity extends AppCompatActivity {
         }
 
         return Integer.parseInt(idString,10);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_test_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(drawerLayout.isDrawerOpen(Gravity.LEFT))
+            drawerLayout.closeDrawer(Gravity.LEFT);
+        else
+            drawerLayout.openDrawer(Gravity.LEFT);
+        return true;
     }
 }

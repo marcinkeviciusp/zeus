@@ -28,7 +28,7 @@ public class ControlPanelActivity extends AppCompatActivity {
     RadioGroup radioGroupTemperatures;
     RadioGroup radioGroupBases;
     Button buttonBoilOrStop;
-
+/**/
     SeekBar seekBarEasybulbBrightness;
     SeekBar seekBarEasybulbColour;
     Button buttonEasybulbOn;

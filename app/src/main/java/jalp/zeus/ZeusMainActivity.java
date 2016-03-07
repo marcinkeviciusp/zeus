@@ -29,6 +29,7 @@ public class ZeusMainActivity extends AppCompatActivity
     ProgressBar spinnerLoggingIn;
     Button buttonLogIn;
     Button buttonLogOut;
+    Button buttonDashboard;
     EditText textFieldEmail;
     EditText textFieldPassword;
     TextView testUserFeedback;
@@ -99,6 +100,7 @@ public class ZeusMainActivity extends AppCompatActivity
         spinnerLoggingIn = (ProgressBar) findViewById(R.id.spinnerLoggingIn);
         buttonLogIn = (Button) findViewById(R.id.buttonLogIn);
         buttonLogOut = (Button) findViewById(R.id.buttonLogOut);
+        buttonDashboard = (Button) findViewById(R.id.buttonLoginDashboard);
         textFieldEmail = (EditText) findViewById(R.id.textFieldEmail);
         textFieldPassword = (EditText) findViewById(R.id.textFieldPassword);
         testUserFeedback = (TextView) findViewById(R.id.TextFieldOutput);
@@ -116,6 +118,12 @@ public class ZeusMainActivity extends AppCompatActivity
 
         buttonLogOut.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) { logout(); }
+        });
+
+        buttonDashboard.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                executeMenu(0, ZeusMainActivity.this);
+            }
         });
 
         buttonLogIn.setOnClickListener(new View.OnClickListener() {

@@ -39,12 +39,8 @@
                     android:gravity="center"
                     android:paddingTop="6dp" />
             </RelativeLayout>
-
-            </android.support.v7.widget.Toolbar>
-
+        </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_control_panel" />
-
-
 </android.support.design.widget.CoordinatorLayout>

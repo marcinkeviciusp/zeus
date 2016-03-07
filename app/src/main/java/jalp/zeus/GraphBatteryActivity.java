@@ -4,7 +4,15 @@ import android.app.Fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TableLayout;
 import android.widget.TextView;
@@ -42,6 +50,9 @@ public class GraphBatteryActivity extends AppCompatActivity {
     protected String graphTypeUpper = graphType.substring(0, 1).toUpperCase() + graphType.substring(1);
     protected LineChart chart;
 
+    DrawerLayout drawerLayout;
+    ListView drawerList;
+
     final ArrayList<ILineDataSet> dataSets = new ArrayList<>();
 
     @Override
@@ -49,6 +60,8 @@ public class GraphBatteryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph_battery);
         chart = (LineChart) findViewById(R.id.graphBattery);
+
+        ((TextView) findViewById(R.id.text_view_graph_battery_username)).setText(ZeusMainActivity.username);
 
         settings(chart);
 
@@ -87,6 +100,20 @@ public class GraphBatteryActivity extends AppCompatActivity {
 
             }
         });
+
+        // side menu
+        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+        ((TextView) findViewById(R.id.text_view_graph_battery_username)).setText(ZeusMainActivity.username);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_graph_battery);
+        drawerList = (ListView) findViewById(R.id.left_drawer_graph_battery);
+        drawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, ZeusMainActivity.zeusMenuSections));
+
+        drawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ZeusMainActivity.executeMenu(id, GraphBatteryActivity.this);
+            }
+        });
+        // side menu end
     }
 
     //This method configure chart settings
@@ -146,4 +173,21 @@ public class GraphBatteryActivity extends AppCompatActivity {
             }
         });
     }
+
+    // Menu Icon Start
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_test_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(drawerLayout.isDrawerOpen(Gravity.LEFT))
+            drawerLayout.closeDrawer(Gravity.LEFT);
+        else
+            drawerLayout.openDrawer(Gravity.LEFT);
+        return true;
+    }
+    // Menu Icon End
 }

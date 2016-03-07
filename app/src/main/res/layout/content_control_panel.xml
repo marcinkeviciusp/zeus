@@ -9,6 +9,7 @@
     tools:context="jalp.zeus.ControlPanelActivity"
     tools:showIn="@layout/activity_control_panel">
     <!-- The main content view -->
+
     <FrameLayout
         android:id="@+id/content_frame_control_panel"
         android:layout_width="match_parent"

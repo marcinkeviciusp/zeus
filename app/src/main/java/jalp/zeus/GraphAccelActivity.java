@@ -1,13 +1,18 @@
 package jalp.zeus;
 
-import android.app.Fragment;
-
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TableLayout;
 import android.widget.TextView;
+import android.support.v7.widget.Toolbar;
 
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
@@ -15,24 +20,16 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
-import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
-import com.jjoe64.graphview.series.DataPoint;
-import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.sql.Timestamp;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Random;
 
 public class GraphAccelActivity extends AppCompatActivity {
 
@@ -42,14 +39,34 @@ public class GraphAccelActivity extends AppCompatActivity {
     protected String graphTypeUpper = graphType.substring(0, 1).toUpperCase() + graphType.substring(1);
     protected LineChart chart;
 
+    DrawerLayout drawerLayout;
+    ListView drawerList;
+
     final ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+
+    // Menu Icon Start
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_test_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(drawerLayout.isDrawerOpen(Gravity.LEFT))
+            drawerLayout.closeDrawer(Gravity.LEFT);
+        else
+            drawerLayout.openDrawer(Gravity.LEFT);
+        return true;
+    }
+    // Menu Icon End
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph_accel);
-        chart = (LineChart) findViewById(R.id.graphAccel);
 
+        chart = (LineChart) findViewById(R.id.graphAccel);
         settings(chart);
 
         readings.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -87,6 +104,20 @@ public class GraphAccelActivity extends AppCompatActivity {
 
             }
         });
+
+        // side menu
+        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+        ((TextView) findViewById(R.id.text_view_graph_accel_username)).setText(ZeusMainActivity.username);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_graph_accel);
+        drawerList = (ListView) findViewById(R.id.left_drawer_graph_accel);
+        drawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, ZeusMainActivity.zeusMenuSections));
+
+        drawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ZeusMainActivity.executeMenu(id, GraphAccelActivity.this);
+            }
+        });
+        // side menu end
     }
 
     //This method configure chart settings
