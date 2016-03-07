@@ -90,7 +90,7 @@ public class SpotActivity extends AppCompatActivity {
                 }else if(dataSnapshot.getKey().equals("temp")){
                     TextView text = (TextView) findViewById(R.id.tempText);
                     text.setText("Temperature: " + dataSnapshot.getValue(double.class).toString());
-                }else if(dataSnapshot.getKey().equals("liveData")){
+                }else if(dataSnapshot.getKey().equals("liveData")) {
                     removeUnusedTypes(dataSnapshot.getValue(String.class));
                 }
             }

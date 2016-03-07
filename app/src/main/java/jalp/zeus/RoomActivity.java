@@ -41,6 +41,7 @@ public class RoomActivity extends AppCompatActivity {
         TextView textView = (TextView) findViewById(R.id.RoomName);
         textView.setText(DashBoardActivity.room);
         setSupportActionBar(toolbar);
+        final TextView noOfSpots = (TextView) findViewById(R.id.amountOfSpots);
 
         final Context context = this;
 
@@ -60,7 +61,7 @@ public class RoomActivity extends AppCompatActivity {
   //      lL.setMinimumHeight(screen.getHeight());
         lL.setMinimumWidth(screen.getWidth());
         lL.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-        //lL.setPadding(0,200,0,0);
+        lL.setPadding(0,200,0,0);
 
         screen.addView(lL, params);
         System.out.println("Liam's stuff>>>>> In Room Activity " + DashBoardActivity.room);
@@ -167,11 +168,23 @@ public class RoomActivity extends AppCompatActivity {
                         container.addView(divider);
                     }
                 }
+
+                String noSpotText = (String)noOfSpots.getText();
+                int numberOfSpots = Integer.parseInt(noSpotText.replaceAll("\\D", ""));
+                numberOfSpots++;
+                noSpotText = "Number of Spots = " + numberOfSpots;
+                noOfSpots.setText(noSpotText);
             }
 
             public void onChildRemoved(DataSnapshot snapshot) {
                 CardView card = (CardView)lL.findViewById(nameToID(snapshot.getKey()));
                 lL.removeView(card);
+
+                String noSpotText = (String)noOfSpots.getText();
+                int numberOfSpots = Integer.parseInt(noSpotText.replaceAll("\\D", ""));
+                numberOfSpots--;
+                noSpotText = "Number of Spots = " + numberOfSpots;
+                noOfSpots.setText(noSpotText);
             }
 
             public void onChildChanged(DataSnapshot snapshot, String someString) {
@@ -182,6 +195,12 @@ public class RoomActivity extends AppCompatActivity {
                     if (data.getKey().equals("room")) {
                         if(!data.getValue(String.class).equals(DashBoardActivity.room)){
                             lL.removeView(card);
+
+                            String noSpotText = (String)noOfSpots.getText();
+                            int numberOfSpots = Integer.parseInt(noSpotText.replaceAll("\\D", ""));
+                            numberOfSpots--;
+                            noSpotText = "Number of Spots = " + numberOfSpots;
+                            noOfSpots.setText(noSpotText);
                         }
                     }else if (data.getKey().equals("name")){
                         TableLayout container = (TableLayout)card.findViewById(nameToID("container"));
