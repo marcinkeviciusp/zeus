@@ -43,6 +43,7 @@ public class DashBoardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dash_board);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        final TextView noOfRooms = (TextView) findViewById(R.id.noOfRooms);
 
         final Context context = this;
 
@@ -108,6 +109,11 @@ public class DashBoardActivity extends AppCompatActivity {
                         container.addView(divider);
                     }
                 }
+                String noRoomText = (String)noOfRooms.getText();
+                int numberOfRooms = Integer.parseInt(noRoomText.replaceAll("\\D", ""));
+                numberOfRooms++;
+                noRoomText = "Number of Rooms = " + numberOfRooms;
+                noOfRooms.setText(noRoomText);
             }
             //... ChildEventListener also defines onChildChanged, onChildRemoved,
             //    onChildMoved and onCanceled, covered in later sections.

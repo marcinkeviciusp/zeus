@@ -10,6 +10,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -89,7 +90,7 @@ public class SpotActivity extends AppCompatActivity {
                 }else if(dataSnapshot.getKey().equals("temp")){
                     TextView text = (TextView) findViewById(R.id.tempText);
                     text.setText("Temperature: " + dataSnapshot.getValue(double.class).toString());
-                }else if(dataSnapshot.getKey().equals("liveData")){
+                }else if(dataSnapshot.getKey().equals("liveData")) {
                     removeUnusedTypes(dataSnapshot.getValue(String.class));
                 }
             }
@@ -231,7 +232,6 @@ public class SpotActivity extends AppCompatActivity {
 
     private void removeType(char character){
         if(character == 'c'){
-            System.out.println("In Compass");
             TextView text = (TextView) findViewById(R.id.compassText);
             text.setVisibility(View.GONE);
         }else if(character == 't'){
@@ -261,17 +261,6 @@ public class SpotActivity extends AppCompatActivity {
             TextView text = (TextView) findViewById(R.id.infraredText);
             text.setVisibility(View.GONE);
         }
-    }
-
-    private boolean typeUsed(char character){
-        String allTypes = "ctlabrseiwxyz";
-        boolean unused = true;
-        for(int i=0;i<allTypes.length();i++){
-            if(character == allTypes.charAt(i)){
-                return true;
-            }
-        }
-        return false;
     }
 
     @Override

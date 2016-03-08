@@ -27,6 +27,11 @@ tools:showIn="@layout/activity_room">
         tools:context="jalp.zeus.RoomActivity"
         tools:showIn="@layout/activity_room"
         android:id="@+id/mainScreen">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/amountOfSpots"
+            android:text="Spots: 0" android:textSize="30dp"/>
         <ScrollView
             android:layout_height="match_parent"
             android:layout_width="match_parent"
