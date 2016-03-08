@@ -46,7 +46,8 @@
                             android:text="Select a Base"
                             android:id="@+id/textViewBaseTitle"
                             android:gravity="center"
-                            android:layout_centerHorizontal="true" />
+                            android:layout_centerHorizontal="true"
+                            android:textSize="35dp" />
 
                         <Button
                             style="?android:attr/buttonStyleSmall"
@@ -55,13 +56,14 @@
                             android:text="\?"
                             android:id="@+id/button_tooltip_base"
                             android:background="@drawable/circle"
-                            android:maxWidth="26dp"
-                            android:maxHeight="26dp"
-                            android:minHeight="26dp"
-                            android:minWidth="26dp"
+                            android:maxWidth="45dp"
+                            android:maxHeight="45dp"
+                            android:minHeight="45dp"
+                            android:minWidth="45dp"
                             android:layout_toRightOf="@+id/textViewBaseTitle"
                             android:layout_marginLeft="7dp"
-                            android:textSize="20dp" />
+                            android:textSize="35dp"
+                            android:gravity="center" />
 
                         <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
                             android:layout_width="wrap_content"
@@ -81,16 +83,19 @@
                                 android:layout_gravity="center_horizontal"
                                 android:layout_below="@+id/textViewBaseTitle"
                                 android:layout_alignLeft="@+id/textViewBaseTitle"
-                                android:layout_alignStart="@+id/textViewBaseTitle" />
+                                android:layout_alignStart="@+id/textViewBaseTitle"
+                                android:textSize="30dp"
+                                android:paddingLeft="16dp" />
+
                         </RadioGroup>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
                             android:text="Which Sun Base to use for operations. Addresses can be found on backs of Bases"
                             android:id="@+id/text_contro_panel_tooltip_info"
-                            android:maxWidth="120dp"
+                            android:maxWidth="220dp"
                             android:layout_centerHorizontal="true"
                             android:layout_below="@+id/button_tooltip_base"
                             android:textColor="#000000"
@@ -99,7 +104,8 @@
                             android:layout_marginTop="5dp"
                             android:visibility="gone"
                             android:gravity="center"
-                            android:padding="5dp" />
+                            android:padding="5dp"
+                            android:textSize="25dp" />
 
                     </RelativeLayout>
 
@@ -116,7 +122,8 @@
                             android:text="Kettle"
                             android:id="@+id/textKettleTitle"
                             android:layout_centerHorizontal="true"
-                            android:textColor="#bdbdbd" />
+                            android:textColor="#bdbdbd"
+                            android:textSize="35dp" />
 
                         <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
                             android:layout_height="wrap_content"
@@ -134,7 +141,9 @@
                                 android:id="@+id/radioButton"
                                 android:layout_alignTop="@+id/buttonBoilStopKettle"
                                 android:layout_centerHorizontal="true"
-                                android:checked="false" />
+                                android:checked="false"
+                                android:textSize="30dp"
+                                android:paddingLeft="28dp" />
 
                             <RadioButton
                                 android:layout_width="wrap_content"
@@ -144,7 +153,9 @@
                                 android:layout_below="@+id/radioButton"
                                 android:layout_alignLeft="@+id/radioButton"
                                 android:layout_alignStart="@+id/radioButton"
-                                android:checked="false" />
+                                android:checked="false"
+                                android:textSize="30dp"
+                                android:paddingLeft="28dp" />
 
                             <RadioButton
                                 android:layout_width="wrap_content"
@@ -154,7 +165,9 @@
                                 android:layout_below="@+id/radioButton2"
                                 android:layout_alignLeft="@+id/radioButton2"
                                 android:layout_alignStart="@+id/radioButton2"
-                                android:checked="false" />
+                                android:checked="false"
+                                android:textSize="30dp"
+                                android:paddingLeft="28dp" />
 
                             <RadioButton
                                 android:layout_width="wrap_content"
@@ -164,7 +177,10 @@
                                 android:layout_below="@+id/radioButton3"
                                 android:layout_alignLeft="@+id/radioButton3"
                                 android:layout_alignStart="@+id/radioButton3"
-                                android:checked="true" />
+                                android:checked="true"
+                                android:textSize="30dp"
+                                android:paddingLeft="10dp"
+                                android:focusable="false" />
                         </RadioGroup>
 
                         <Button
@@ -177,7 +193,9 @@
                             android:layout_below="@+id/radioGroupTemperatures"
                             android:layout_centerHorizontal="true"
                             android:enabled="false"
-                            android:background="@android:color/background_light"/>
+                            android:background="@android:color/background_light"
+                            android:textSize="35dp"
+                            android:minWidth="140dp" />
                     </RelativeLayout>
                 </LinearLayout>
 
@@ -197,7 +215,8 @@
                     android:layout_centerHorizontal="true"
                     android:paddingBottom="2dp"
                     android:clickable="false"
-                    android:textColor="#bdbdbd" />
+                    android:textColor="#bdbdbd"
+                    android:textSize="35dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -211,7 +230,8 @@
                     android:gravity="center"
                     android:layout_centerHorizontal="true"
                     android:layout_below="@+id/textEasybulbHeader"
-                    android:textColor="#bdbdbd" />
+                    android:textColor="#bdbdbd"
+                    android:textSize="35dp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -223,7 +243,7 @@
                     android:layout_columnSpan="3"
                     android:layout_below="@+id/textViewEasybulbColour"
                     android:layout_centerHorizontal="true"
-                    />
+                    android:maxHeight="54dp" />
 
                 <SeekBar
                     android:layout_width="wrap_content"
@@ -234,10 +254,10 @@
                     android:thumbTint="#ffffff"
                     android:layout_alignTop="@+id/imageViewColourGradient"
                     android:layout_centerHorizontal="true"
-                    android:minHeight="45dp"
-                    android:maxWidth="420dp"
-                    android:minWidth="420dp"
-                    android:maxHeight="45dp"
+                    android:minHeight="54dp"
+                    android:maxWidth="600dp"
+                    android:minWidth="600dp"
+                    android:maxHeight="54dp"
                     android:paddingBottom="2dp"
                     android:max="255"
                     android:clickable="false"/>
@@ -258,10 +278,10 @@
                     android:indeterminate="false"
                     android:progress="29"
                     android:layout_centerHorizontal="true"
-                    android:maxHeight="45dp"
-                    android:maxWidth="420dp"
-                    android:minHeight="45dp"
-                    android:minWidth="420dp"
+                    android:maxHeight="54dp"
+                    android:maxWidth="600dp"
+                    android:minHeight="54dp"
+                    android:minWidth="600dp"
                     android:layout_alignTop="@+id/imageViewBrightnessGradient"
                     android:paddingBottom="2dp"
                     android:enabled="false"
@@ -276,29 +296,33 @@
                     android:gravity="center"
                     android:layout_below="@+id/seekBarEasybulbColour"
                     android:layout_centerHorizontal="true"
-                    android:textColor="#bdbdbd" />
+                    android:textColor="#bdbdbd"
+                    android:textSize="35dp" />
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="ON"
                     android:id="@+id/buttonEasybulbOn"
-                    android:minWidth="118dp"
+                    android:minWidth="200dp"
                     android:layout_alignTop="@+id/buttonEasybulbWhite"
                     android:layout_toRightOf="@+id/buttonEasybulbWhite"
                     android:enabled="false"
-                    android:background="@android:color/background_light"/>
+                    android:background="@android:color/background_light"
+                    android:textSize="35dp"
+                    android:nestedScrollingEnabled="false" />
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="OFF"
                     android:id="@+id/buttonEasybulbOff"
-                    android:minWidth="118dp"
+                    android:minWidth="200dp"
                     android:layout_alignTop="@+id/buttonEasybulbWhite"
                     android:layout_toLeftOf="@+id/buttonEasybulbWhite"
                     android:enabled="false"
-                    android:background="@android:color/background_light"/>
+                    android:background="@android:color/background_light"
+                    android:textSize="35dp" />
 
                 <Button
                     android:layout_width="wrap_content"
@@ -307,11 +331,12 @@
                     android:id="@+id/buttonEasybulbWhite"
                     android:layout_row="11"
                     android:layout_column="2"
-                    android:minWidth="118dp"
+                    android:minWidth="200dp"
                     android:layout_centerHorizontal="true"
                     android:layout_below="@+id/gridLayoutControlPanel"
                     android:enabled="false"
-                    android:background="@android:color/background_light"/>
+                    android:background="@android:color/background_light"
+                    android:textSize="35dp" />
 
                 <GridLayout
                     android:layout_width="wrap_content"
@@ -332,7 +357,8 @@
                         android:gravity="center"
                         android:layout_below="@+id/textEasybulbHeader"
                         android:layout_alignEnd="@+id/textEasybulbHeader"
-                        android:textColor="#bdbdbd" />
+                        android:textColor="#bdbdbd"
+                        android:textSize="35dp" />
 
                     <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
                         android:layout_width="wrap_content"
@@ -353,7 +379,10 @@
                             android:id="@+id/radioButton5"
                             android:layout_alignTop="@+id/buttonBoilStopKettle"
                             android:layout_centerHorizontal="true"
-                            android:checked="false" />
+                            android:checked="false"
+                            android:textSize="35dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp" />
 
                         <RadioButton
                             android:layout_width="wrap_content"
@@ -363,7 +392,10 @@
                             android:layout_below="@+id/radioButton5"
                             android:layout_alignLeft="@+id/radioButton5"
                             android:layout_alignStart="@+id/radioButton5"
-                            android:checked="false" />
+                            android:checked="false"
+                            android:textSize="35dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp" />
 
                         <RadioButton
                             android:layout_width="wrap_content"
@@ -373,7 +405,10 @@
                             android:layout_below="@+id/radioButton6"
                             android:layout_alignLeft="@+id/radioButton6"
                             android:layout_alignStart="@+id/radioButton6"
-                            android:checked="false" />
+                            android:checked="false"
+                            android:textSize="35dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp" />
 
                         <RadioButton
                             android:layout_width="wrap_content"
@@ -383,14 +418,20 @@
                             android:layout_below="@+id/radioButton7"
                             android:layout_alignLeft="@+id/radioButton7"
                             android:layout_alignStart="@+id/radioButton7"
-                            android:checked="false" />
+                            android:checked="false"
+                            android:textSize="35dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp" />
 
                         <RadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="All"
                             android:id="@+id/radioButton9"
-                            android:checked="true" />
+                            android:checked="true"
+                            android:textSize="35dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp" />
                     </RadioGroup>
                 </GridLayout>
             </RelativeLayout>

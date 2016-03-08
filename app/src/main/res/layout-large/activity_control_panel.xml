@@ -28,7 +28,7 @@
                     android:layout_height="wrap_content"
                     android:text="Username Here"
                     android:elegantTextHeight="false"
-                    android:textSize="12dp"
+                    android:textSize="16dp"
                     android:id="@+id/text_view_control_panel_username" />
                 <TextView
                     android:layout_width="match_parent"
@@ -37,7 +37,7 @@
                     android:elegantTextHeight="false"
                     android:textSize="40dp"
                     android:gravity="center"
-                    android:paddingTop="6dp" />
+                    android:paddingTop="9dp" />
             </RelativeLayout>
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>

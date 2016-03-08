@@ -1,5 +1,6 @@
 package jalp.zeus;
 
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -78,7 +79,7 @@ public class ControlPanelActivity extends AppCompatActivity {
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_control_panel);
         drawerList = (ListView) findViewById(R.id.left_drawer_control_panel);
-        drawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, ZeusMainActivity.zeusMenuSections));
+        drawerList.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_expandable_list_item_1, ZeusMainActivity.zeusMenuSections));
         drawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ZeusMainActivity.executeMenu(id, ControlPanelActivity.this);
@@ -100,6 +101,12 @@ public class ControlPanelActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot baseEntry : dataSnapshot.getChildren()) {
                     RadioButton btn = new RadioButton(ControlPanelActivity.this);
+
+                    // On big screen - big text generated
+                    int screen = (getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK);
+                    if (screen == Configuration.SCREENLAYOUT_SIZE_LARGE || screen == Configuration.SCREENLAYOUT_SIZE_XLARGE)
+                        btn.setTextSize(30);
+
                     radioGroupBases.addView(btn);
                     btn.setText(baseEntry.getKey());
 
@@ -179,22 +186,21 @@ public class ControlPanelActivity extends AppCompatActivity {
                 textKettle.setTextColor(gray);
 
                 for(int i = 0; i < radioGroupEasybulbGroup.getChildCount(); i++)
-                { ((RadioButton)radioGroupEasybulbGroup.getChildAt(i)).setEnabled(false); }
+                { (radioGroupEasybulbGroup.getChildAt(i)).setEnabled(false); }
 
                 for(int i = 0; i < radioGroupTemperatures.getChildCount(); i++)
-                { ((RadioButton)radioGroupTemperatures.getChildAt(i)).setEnabled(false); }
+                { (radioGroupTemperatures.getChildAt(i)).setEnabled(false); }
 
                 buttonBoilOrStop.setEnabled(false);
                 buttonEasybulbOff.setEnabled(false);
                 buttonEasybulbOn.setEnabled(false);
                 buttonEasybulbWhite.setEnabled(false);
 
-                buttonBoilOrStop.setBackgroundColor(getResources().getColor(R.color.cardview_light_background));
-                buttonEasybulbOff.setBackgroundColor(getResources().getColor(R.color.cardview_light_background));
-                buttonEasybulbOn.setBackgroundColor(getResources().getColor(R.color.cardview_light_background));
-                buttonEasybulbWhite.setBackgroundColor(getResources().getColor(R.color.cardview_light_background));
-
-
+                int lightGray =  17170447;
+                buttonBoilOrStop.setBackgroundColor(lightGray);
+                buttonEasybulbOff.setBackgroundColor(lightGray);
+                buttonEasybulbOn.setBackgroundColor(lightGray);
+                buttonEasybulbWhite.setBackgroundColor(lightGray);
             }
             else
             {
@@ -212,11 +218,11 @@ public class ControlPanelActivity extends AppCompatActivity {
                 textKettle.setTextColor(balck);
 
                 for(int i = 0; i < radioGroupEasybulbGroup.getChildCount(); i++){
-                    ((RadioButton)radioGroupEasybulbGroup.getChildAt(i)).setEnabled(true);
+                    (radioGroupEasybulbGroup.getChildAt(i)).setEnabled(true);
                 }
 
                 for(int i = 0; i < radioGroupTemperatures.getChildCount(); i++){
-                    ((RadioButton)radioGroupTemperatures.getChildAt(i)).setEnabled(true);
+                    (radioGroupTemperatures.getChildAt(i)).setEnabled(true);
                 }
 
                 buttonBoilOrStop.setEnabled(true);
