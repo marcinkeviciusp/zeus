@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout_control_panel"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="jalp.zeus.ControlPanelActivity"
+    tools:showIn="@layout/activity_control_panel">
+    <!-- The main content view -->
+
+    <FrameLayout
+        android:id="@+id/content_frame_control_panel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="9"
+            android:paddingBottom="50dp">
+
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="0dip"
+                android:layout_weight="4" >
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="2" >
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_gravity="center">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceLarge"
+                            android:text="Select a Base"
+                            android:id="@+id/textViewBaseTitle"
+                            android:gravity="center"
+                            android:layout_centerHorizontal="true" />
+
+                        <Button
+                            style="?android:attr/buttonStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="\?"
+                            android:id="@+id/button_tooltip_base"
+                            android:background="@drawable/circle"
+                            android:maxWidth="26dp"
+                            android:maxHeight="26dp"
+                            android:minHeight="26dp"
+                            android:minWidth="26dp"
+                            android:layout_toRightOf="@+id/textViewBaseTitle"
+                            android:layout_marginLeft="7dp"
+                            android:textSize="20dp" />
+
+                        <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:id="@+id/radioGroupBases"
+                            android:gravity="center"
+                            android:layout_below="@+id/textViewBaseTitle"
+                            android:layout_centerHorizontal="true">
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="N/A"
+                                android:id="@+id/radioButtonBaseNA"
+                                android:checked="true"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_below="@+id/textViewBaseTitle"
+                                android:layout_alignLeft="@+id/textViewBaseTitle"
+                                android:layout_alignStart="@+id/textViewBaseTitle" />
+                        </RadioGroup>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:text="Which Sun Base to use for operations. Addresses can be found on backs of Bases"
+                            android:id="@+id/text_contro_panel_tooltip_info"
+                            android:maxWidth="120dp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_below="@+id/button_tooltip_base"
+                            android:textColor="#000000"
+                            android:textAlignment="center"
+                            android:background="@drawable/circle"
+                            android:layout_marginTop="5dp"
+                            android:visibility="gone"
+                            android:gravity="center"
+                            android:padding="5dp" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_gravity="center">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceLarge"
+                            android:text="Kettle"
+                            android:id="@+id/textKettleTitle"
+                            android:layout_centerHorizontal="true"
+                            android:textColor="#bdbdbd" />
+
+                        <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:id="@+id/radioGroupTemperatures"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_below="@+id/textKettleTitle"
+                            android:layout_centerHorizontal="true">
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="65 °C"
+                                android:id="@+id/radioButton"
+                                android:layout_alignTop="@+id/buttonBoilStopKettle"
+                                android:layout_centerHorizontal="true"
+                                android:checked="false" />
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="80 °C"
+                                android:id="@+id/radioButton2"
+                                android:layout_below="@+id/radioButton"
+                                android:layout_alignLeft="@+id/radioButton"
+                                android:layout_alignStart="@+id/radioButton"
+                                android:checked="false" />
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="95 °C"
+                                android:id="@+id/radioButton3"
+                                android:layout_below="@+id/radioButton2"
+                                android:layout_alignLeft="@+id/radioButton2"
+                                android:layout_alignStart="@+id/radioButton2"
+                                android:checked="false" />
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="100 °C"
+                                android:id="@+id/radioButton4"
+                                android:layout_below="@+id/radioButton3"
+                                android:layout_alignLeft="@+id/radioButton3"
+                                android:layout_alignStart="@+id/radioButton3"
+                                android:checked="true" />
+                        </RadioGroup>
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="BOIL"
+                            android:id="@+id/buttonBoilStopKettle"
+                            android:layout_row="2"
+                            android:layout_column="2"
+                            android:layout_below="@+id/radioGroupTemperatures"
+                            android:layout_centerHorizontal="true"
+                            android:enabled="false"
+                            android:background="@android:color/background_light"/>
+                    </RelativeLayout>
+                </LinearLayout>
+
+            </FrameLayout>
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="0dip"
+                android:layout_weight="5" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="EasyBulb"
+                    android:id="@+id/textEasybulbHeader"
+                    android:gravity="center"
+                    android:layout_centerHorizontal="true"
+                    android:paddingBottom="2dp"
+                    android:clickable="false"
+                    android:textColor="#bdbdbd" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Colour"
+                    android:id="@+id/textViewEasybulbColour"
+                    android:layout_row="4"
+                    android:layout_column="0"
+                    android:layout_columnSpan="3"
+                    android:gravity="center"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/textEasybulbHeader"
+                    android:textColor="#bdbdbd" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageViewColourGradient"
+                    android:layout_row="5"
+                    android:layout_column="0"
+                    android:src="@drawable/easybulbgray"
+                    android:layout_columnSpan="3"
+                    android:layout_below="@+id/textViewEasybulbColour"
+                    android:layout_centerHorizontal="true"
+                    />
+
+                <SeekBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/seekBarEasybulbColour"
+                    android:indeterminate="false"
+                    android:progress="0"
+                    android:thumbTint="#ffffff"
+                    android:layout_alignTop="@+id/imageViewColourGradient"
+                    android:layout_centerHorizontal="true"
+                    android:minHeight="45dp"
+                    android:maxWidth="420dp"
+                    android:minWidth="420dp"
+                    android:maxHeight="45dp"
+                    android:paddingBottom="2dp"
+                    android:max="255"
+                    android:clickable="false"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageViewBrightnessGradient"
+                    android:src="@drawable/easybulbgray"
+                    android:layout_below="@+id/textViewEasybulbBrightness"
+                    android:layout_centerHorizontal="true" />
+
+                <SeekBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/seekBarEasybulbBrightness"
+                    android:max="29"
+                    android:indeterminate="false"
+                    android:progress="29"
+                    android:layout_centerHorizontal="true"
+                    android:maxHeight="45dp"
+                    android:maxWidth="420dp"
+                    android:minHeight="45dp"
+                    android:minWidth="420dp"
+                    android:layout_alignTop="@+id/imageViewBrightnessGradient"
+                    android:paddingBottom="2dp"
+                    android:enabled="false"
+                    android:clickable="false"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Brightness"
+                    android:id="@+id/textViewEasybulbBrightness"
+                    android:gravity="center"
+                    android:layout_below="@+id/seekBarEasybulbColour"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="#bdbdbd" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ON"
+                    android:id="@+id/buttonEasybulbOn"
+                    android:minWidth="118dp"
+                    android:layout_alignTop="@+id/buttonEasybulbWhite"
+                    android:layout_toRightOf="@+id/buttonEasybulbWhite"
+                    android:enabled="false"
+                    android:background="@android:color/background_light"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="OFF"
+                    android:id="@+id/buttonEasybulbOff"
+                    android:minWidth="118dp"
+                    android:layout_alignTop="@+id/buttonEasybulbWhite"
+                    android:layout_toLeftOf="@+id/buttonEasybulbWhite"
+                    android:enabled="false"
+                    android:background="@android:color/background_light"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="WHITE"
+                    android:id="@+id/buttonEasybulbWhite"
+                    android:layout_row="11"
+                    android:layout_column="2"
+                    android:minWidth="118dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/gridLayoutControlPanel"
+                    android:enabled="false"
+                    android:background="@android:color/background_light"/>
+
+                <GridLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/seekBarEasybulbBrightness"
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/gridLayoutControlPanel"
+                    android:paddingBottom="2dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Group"
+                        android:id="@+id/textFieldEasybulbGroup"
+                        android:layout_row="0"
+                        android:layout_column="0"
+                        android:gravity="center"
+                        android:layout_below="@+id/textEasybulbHeader"
+                        android:layout_alignEnd="@+id/textEasybulbHeader"
+                        android:textColor="#bdbdbd" />
+
+                    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:id="@+id/radioGroupEasybulbGroup"
+                        android:layout_column="1"
+                        android:layout_row="0"
+                        android:layout_columnSpan="1"
+                        android:layout_toRightOf="@+id/textFieldEasybulbGroup"
+                        android:layout_toEndOf="@+id/textFieldEasybulbGroup"
+                        android:layout_alignTop="@+id/textFieldEasybulbGroup">
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1"
+                            android:id="@+id/radioButton5"
+                            android:layout_alignTop="@+id/buttonBoilStopKettle"
+                            android:layout_centerHorizontal="true"
+                            android:checked="false" />
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2"
+                            android:id="@+id/radioButton6"
+                            android:layout_below="@+id/radioButton5"
+                            android:layout_alignLeft="@+id/radioButton5"
+                            android:layout_alignStart="@+id/radioButton5"
+                            android:checked="false" />
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="3"
+                            android:id="@+id/radioButton7"
+                            android:layout_below="@+id/radioButton6"
+                            android:layout_alignLeft="@+id/radioButton6"
+                            android:layout_alignStart="@+id/radioButton6"
+                            android:checked="false" />
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="4"
+                            android:id="@+id/radioButton8"
+                            android:layout_below="@+id/radioButton7"
+                            android:layout_alignLeft="@+id/radioButton7"
+                            android:layout_alignStart="@+id/radioButton7"
+                            android:checked="false" />
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="All"
+                            android:id="@+id/radioButton9"
+                            android:checked="true" />
+                    </RadioGroup>
+                </GridLayout>
+            </RelativeLayout>
+        </LinearLayout>
+
+    </FrameLayout>
+
+        <!-- The navigation drawer -->
+    <ListView android:id="@+id/left_drawer_control_panel"
+    android:layout_width="180dp"
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+    android:choiceMode="singleChoice"
+    android:divider="@android:color/transparent"
+    android:dividerHeight="0dp"
+    android:background="#DDD"/>
+</android.support.v4.widget.DrawerLayout>
